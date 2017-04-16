@@ -1,0 +1,26 @@
+title: Android Essence
+description: Crafting Android User Interfaces
+author: Adam McNeilly
+logo: /static/img/avatar.png
+github: https://github.com/AdamMc331
+about: Software Engineer
+
+baseurl: ""
+url: "https://codeasashu.github.io/hcz-jekyll-blog"
+
+# disqus_shortname: aboutashu
+# google_analytics: UA-72862926-1
+
+share:
+  twitter_username: \AdamMc331
+  fb_appid: 000000000000
+
+
+enableTags: true
+tagarray: []
+
+paginate: 20
+per_page: 20
+paginate_path: "/page:num/"
+markdown: kramdown
+gems: [jekyll-paginate, jekyll-gist]
