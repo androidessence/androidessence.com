@@ -5,9 +5,101 @@
     <description>Crafting Android User Interfaces</description>
     <link>https://codeasashu.github.io/hcz-jekyll-blog/</link>
     <atom:link href="https://codeasashu.github.io/hcz-jekyll-blog/sitemap.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 16 Apr 2017 19:32:58 -0400</pubDate>
-    <lastBuildDate>Sun, 16 Apr 2017 19:32:58 -0400</lastBuildDate>
+    <pubDate>Tue, 18 Apr 2017 22:10:02 -0400</pubDate>
+    <lastBuildDate>Tue, 18 Apr 2017 22:10:02 -0400</lastBuildDate>
     <generator>Jekyll v3.1.6</generator>
+    
+      <item>
+        <title>Creating Android App Shortcuts</title>
+        <description>&lt;p&gt;Android app shortcuts are a special feature added in Android 7.1 (API 25). Shortcuts are special actions that appear when you long press on a launcher icon, that will trigger a specified intent. With this post you will learn how to create both static and dynamic app shortcuts. The only pre-requisite is that your app is targeting API 25 or greater.&lt;/p&gt;
+
+&lt;h4 id=&quot;static-shortcuts&quot;&gt;Static Shortcuts&lt;/h4&gt;
+
+&lt;p&gt;Static app shortcuts are shortcuts that are defined via XML. This means they are created at compile time, and will be consistent as long as your app is on the user’s device. Common use cases for this would be to launch a regularly used activity in your app that is not the launcher activity.&lt;/p&gt;
+
+&lt;p&gt;Let’s first look at how we can define a shortcut in XML:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;shortcuts&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;xmlns:android=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://schemas.android.com/apk/res/android&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;shortcut&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;android:enabled=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;true&quot;&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;android:icon=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;@mipmap/ic_launcher&quot;&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;android:shortcutId=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;static_shortcut&quot;&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;android:shortcutLongLabel=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;@string/static_shortcut_long_label&quot;&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;android:shortcutShortLabel=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;@string/static_shortcut_short_label&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;intent&lt;/span&gt;
+            &lt;span class=&quot;na&quot;&gt;android:action=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;android.intent.action.VIEW&quot;&lt;/span&gt;
+            &lt;span class=&quot;na&quot;&gt;android:targetClass=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;com.androidessence.appshortcuts.MainActivity&quot;&lt;/span&gt;
+            &lt;span class=&quot;na&quot;&gt;android:targetPackage=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;com.androidessence.appshortcuts&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/shortcut&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/shortcuts&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;The above snippet is in a file called shortcuts.xml inside the xml-v25 folder. The property names make this pretty straight forward, but here is a quick run down:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;enabled - Whether or not your shortcut can be used.&lt;/li&gt;
+  &lt;li&gt;icon - The icon that appears on your shortcut.&lt;/li&gt;
+  &lt;li&gt;shortcutId - The id used to reference your shortcut in code.&lt;/li&gt;
+  &lt;li&gt;Long/Short label - A label that appears on your shortcut. Which label is shown is dependent on the screen size of the device being used.&lt;/li&gt;
+  &lt;li&gt;intent - The intent that should be launched when your shortcut is clicked. In this case, just launching our MainActivity.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;In order for this shortcut to appear after a long press, though, we need to add some meta-data to our launcher activity. Find your default activity in your AndroidManifest.xml file, and add this information:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta-data&lt;/span&gt;
+   &lt;span class=&quot;na&quot;&gt;android:name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;android.app.shortcuts&quot;&lt;/span&gt;
+   &lt;span class=&quot;na&quot;&gt;android:resource=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;@xml/shortcuts&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;And that’s it! You can run the app at this point and you should see a static shortcut appear.&lt;/p&gt;
+
+&lt;h4 id=&quot;dynamic-shortcuts&quot;&gt;Dynamic Shortcuts&lt;/h4&gt;
+
+&lt;p&gt;Dynamic app shortcuts are added via Java code when your launcher activity is created. As a result of this, they can be changed, disabled, and customized for the user. A use case for dynamic app shortcuts would be a messaging app - you could create a shortcut for each of your user’s top 5 contacts, for example, that open the messaging thread with the contact that was clicked.&lt;/p&gt;
+
+&lt;p&gt;Creating a dynamic shortcut is very straightforward, while you may need to tweak this to create shortcuts specific to your app. To start, just use the &lt;a href=&quot;https://developer.android.com/reference/android/content/pm/ShortcutInfo.html&quot;&gt;ShortcutInfo.Builder&lt;/a&gt; class to create a shortcut like we did in XML:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;Intent&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;googleIntent&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Intent&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Intent&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ACTION_VIEW&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Uri&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;parse&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;https://www.google.com&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;ShortcutInfo&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;shortcut&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ShortcutInfo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;Builder&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;dynamic_shortcut&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+   &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setShortLabel&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getString&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;R&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;dynamic_shortcut_short_label&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt;
+   &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setLongLabel&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getString&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;R&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;dynamic_shortcut_long_label&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt;
+   &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setIcon&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Icon&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;createWithResource&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;R&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;mipmap&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ic_launcher&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt;
+   &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setIntent&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;googleIntent&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+   &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Then, we can get our &lt;a href=&quot;https://developer.android.com/reference/android/content/pm/ShortcutManager.html&quot;&gt;ShortcutManager&lt;/a&gt; and add the shortcut:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;ShortcutManager&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;shortcutManager&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;getSystemService&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ShortcutManager&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;shortcutManager&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;addDynamicShortcuts&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Collections&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;singletonList&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shortcut&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Now you’ve created a dynamic app shortcut, too! If you run the app again, you will see this shortcut when you long press on the launcher icon as well. One thing to note, is that the icon we just made was inside the onCreate() method of our activity. That means it won’t appear right after install, but it will appear after the user opens the app for the first time.&lt;/p&gt;
+
+&lt;h4 id=&quot;continued-development&quot;&gt;Continued Development&lt;/h4&gt;
+
+&lt;p&gt;This was just a quick starting guide on how to create shortcuts, but you may have more questions. How do I change them? How do I disable them? What happens if a user pins a shortcut? Can I track analytics on shortcuts?&lt;/p&gt;
+
+&lt;p&gt;Many of those questions can be answered in the &lt;a href=&quot;https://developer.android.com/guide/topics/ui/shortcuts.html&quot;&gt;official documentation&lt;/a&gt; for App Shortcuts.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://twitter.com/calren24&quot;&gt;Caren Chang&lt;/a&gt; gave an excellent presentation on app shortcuts at Droidcon Boston, but the video is not up at the time of posting this. I will try to update the blog post when it is.&lt;/p&gt;
+
+&lt;p&gt;The sample application used for this blog post can be found on &lt;a href=&quot;https://github.com/androidessence/App-Shortcuts&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
+</description>
+        <pubDate>Fri, 14 Apr 2017 00:00:00 -0400</pubDate>
+        <link>https://codeasashu.github.io/hcz-jekyll-blog/android/2017/04/14/creating-android-app-shortcuts.html</link>
+        <guid isPermaLink="true">https://codeasashu.github.io/hcz-jekyll-blog/android/2017/04/14/creating-android-app-shortcuts.html</guid>
+        
+        
+        <category>Android</category>
+        
+      </item>
     
       <item>
         <title>Welcome to Jekyll!</title>
