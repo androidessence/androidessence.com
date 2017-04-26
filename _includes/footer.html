@@ -1,12 +1,11 @@
-<footer>
-  © 2016 Your Name <a href="#">Privacy link</a> - Powered by Jekyll.
+<footer class="c-footer">
+  <div class="u-container c-footer__container">
+    <p>&copy; {{ site.title }} {{ site.time | date: '%Y' }}</p>
+    <p>
+      {% if site.twitterUsername %}<a href="https://twitter.com/{{ site.twitterUsername }}">Twitter</a>{% endif %}
+      {% if site.githubUsername %}<a href="https://github.com/{{ site.githubUsername }}">Github</a>{% endif %}
+      {% if site.dribbbleUsername %}<a href="https://dribbble.com/{{ site.dribbbleUsername }}">Dribbble</a>{% endif %}
+      {% if site.codepenUsername %}<a href="http://codepen.io/{{ site.codepenUsername }}">CodePen</a>{% endif %}
+    </p>
+  </div>
 </footer>
-<div align="center">
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-  <ins class="adsbygoogle"
-    style="display:block"
-    data-ad-client="ca-pub-0000000000000000"
-    data-ad-slot="0000000000"
-    data-ad-format="auto"></ins>
-  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-</div>

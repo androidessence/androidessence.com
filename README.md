@@ -1,21 +1,23 @@
-## HCZ Material theme
+# material-jekyll-theme
+[Demo](http://alexcarpenter.github.io/material-jekyll-theme)
 
-This is a simple personal material theme, best suited for personal authors, programmars, bloggers. 
+![Material Jekyll Theme](https://d13yacurqjgara.cloudfront.net/users/37718/screenshots/2430279/slice_1.jpg)
 
-### Demo
-* [https://codeasashu.github.io/hcz-jekyll-blog](https://codeasashu.github.io/hcz-jekyll-blog/)
+## Getting started
+1. `git clone https://github.com/alexcarpenter/material-jekyll-theme.git`
+2. `cd material-jekyll-theme`
+3. Configure the `_config.yml` file as needed
+4. `jekyll serve`
 
-#### Feature
+## Options
+Customize your options within the `_config.yml` file.
 
-* Sitemap and XML Feed
-* Projects and tags
-* Paginations in homepage
-* Posts under category
-* Related Posts
-* Highlight pre
-* Next & Previous Post
-* Disqus comment
-
-#### Screenshot
-
-![Screenshot Home Page](https://raw.githubusercontent.com/ashutosh2k12/jekyllthemes/master/thumbnails/hcz-material.png  "Screenshot Home Page")
++ Theme
+  - Green
+  - Blue
+  - Orange
+  - Purple
+  - Grey
++ Fixed Navigation
+  - True
+  - False
