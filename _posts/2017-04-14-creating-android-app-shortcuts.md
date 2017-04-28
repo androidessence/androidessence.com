@@ -3,6 +3,7 @@ layout: post
 modified: 2017-04-14
 title: Creating Android App Shortcuts
 published: true
+tags: [android, app-shortcuts, nougat]
 description: Shortcuts are special actions that appear when you long press on a launcher icon. This post teaches how to implement them.
 categories: Android
 ---
