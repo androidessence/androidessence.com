@@ -14,6 +14,54 @@
       "tags"     : "android, views",
       "url"      : "http://localhost:4000/android/pinchzoomtextview-library-released/",
       "date"     : "2016-11-27 00:00:00 -0500"
+    } ,
+  
+    {
+      "title"    : "Getting Started With Retrofit In Android",
+      "category" : "",
+      "tags"     : "android, retrofit, networking",
+      "url"      : "http://localhost:4000/android/getting-started-with-retrofit/",
+      "date"     : "2016-11-05 00:00:00 -0400"
+    } ,
+  
+    {
+      "title"    : "RecyclerViewUtils Library Released",
+      "category" : "",
+      "tags"     : "android, RecyclerView, library",
+      "url"      : "http://localhost:4000/android/recyclerviewutils-library-released/",
+      "date"     : "2016-08-31 00:00:00 -0400"
+    } ,
+  
+    {
+      "title"    : "MaterialSearchView Library",
+      "category" : "",
+      "tags"     : "android, material design, library",
+      "url"      : "http://localhost:4000/android/materialsearchview-library/",
+      "date"     : "2016-04-22 00:00:00 -0400"
+    } ,
+  
+    {
+      "title"    : "RichTextView Library Released",
+      "category" : "",
+      "tags"     : "android, views, TextView, library",
+      "url"      : "http://localhost:4000/android/richtextview-library-released/",
+      "date"     : "2016-04-03 00:00:00 -0400"
+    } ,
+  
+    {
+      "title"    : "Designing User Interface For Android Wear Part 2&amp;#58; Cards",
+      "category" : "",
+      "tags"     : "android, android wear, cards, material design",
+      "url"      : "http://localhost:4000/android/designing-user-interfaces-for-android-wear/",
+      "date"     : "2016-01-26 00:00:00 -0500"
+    } ,
+  
+    {
+      "title"    : "Designing User Interface For Android Wear Part 1&amp;#58; Lists",
+      "category" : "",
+      "tags"     : "android, android wear",
+      "url"      : "http://localhost:4000/android/designing-user-interface-for-android-wear-part-1/",
+      "date"     : "2016-01-01 00:00:00 -0500"
     } 
   
 ]

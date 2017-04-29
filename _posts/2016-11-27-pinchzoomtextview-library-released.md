@@ -14,6 +14,6 @@ All you have to do is override the `onTouchEvent()` method of your view, which i
 
 <!--more-->
 
-![Sample Gif](/images/sample.gif)
+![Sample Gif](/images/pztv-sample.gif)
 
 Interested in using this in your next project? You can get more details by viewing the library on [GitHub](https://github.com/androidessence/PinchZoomTextView).
