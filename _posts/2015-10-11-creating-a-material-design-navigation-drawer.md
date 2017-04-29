@@ -53,10 +53,10 @@ The NavigationView should still belong inside a DrawerLayout, as we did previous
 
 The header layout is rather simple; It’s just a LinearLayout. However, it does have a few attributes to keep it up to spec. These include, but are not limited to:
 
- * 16dp padding
- * 160dp height
- * 16dp padding above the ImageView
- * 16dp padding between the top TextView and the ImageView
+* 16dp padding
+* 160dp height
+* 16dp padding above the ImageView
+* 16dp padding between the top TextView and the ImageView
 
 The XML looks like this:
 
