@@ -22,4 +22,4 @@ You'll notice three really great things about this sample:
 2. The ListView is prepopulated with recent searches.
 3. The ListView automatically updates to show the filtered and suggested searches based on user input.
 
-The MAterialSearchView is supported with a min SDK of 14. For information on how to include it in your next project, as well as more details on the functionality of the library, please see the linked repository above. 
+The MaterialSearchView is supported with a min SDK of 14. For information on how to include it in your next project, as well as more details on the functionality of the library, please see the linked repository above. 

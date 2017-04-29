@@ -21,23 +21,23 @@ At the heart of these classes is [CoreViewHolder](https://github.com/AdamMc331/R
 Here is a sample of a CoreviewHolder for Account objects:
 
 ```java
-public class AccountViewHolder extends CoreViewHolder<Account> {
-   private TextView tvName;
-   private TextView tvBalance;
- 
-   public AccountViewHolder(View view) {
-      super(view);
- 
-      this.tvName = (TextView) view.findViewById(R.id.account_name);
-      this.tvBalance = (TextView) view.findViewById(R.id.account_balance);
+   public class AccountViewHolder extends CoreViewHolder<Account> {
+      private TextView tvName;
+      private TextView tvBalance;
+    
+      public AccountViewHolder(View view) {
+         super(view);
+    
+         this.tvName = (TextView) view.findViewById(R.id.account_name);
+         this.tvBalance = (TextView) view.findViewById(R.id.account_balance);
+      }
+    
+      @Override
+         protected void bindItem(Account item) {
+         this.tvName.setText(item.getName());
+         this.tvBalance.setText(String.valueOf(item.getBalance()));
+      }
    }
- 
-   @Override
-      protected void bindItem(Account item) {
-      this.tvName.setText(item.getName());
-      this.tvBalance.setText(String.valueOf(item.getBalance()));
-   }
-}
 ```
 
 # CoreRecyclerViewAdapter
@@ -52,18 +52,18 @@ Using the CoreViewHolder class from above, the [CoreRecyclerViewAdapter](https:/
 Thanks to this handy utils class, it cuts down on a ton of boilerplate code inside your adapter, and make it very simple:
 
 ```java
-public class AccountAdapter extends CoreRecyclerViewAdapter<Account, AccountAdapter.AccountViewHolder>{
-   public AccountAdapter(Context context, List<Account> accounts) {
-      super(context, accounts);
+   public class AccountAdapter extends CoreRecyclerViewAdapter<Account, AccountAdapter.AccountViewHolder>{
+      public AccountAdapter(Context context, List<Account> accounts) {
+         super(context, accounts);
+      }
+    
+      @Override
+      public AccountViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+         return new AccountViewHolder(LayoutInflater.from(context).inflate(R.layout.list_item_account, parent, false));
+      }
+    
+      public class AccountViewHolder extends CoreViewHolder<Account> {
+         ...
+      }
    }
- 
-   @Override
-   public AccountViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-      return new AccountViewHolder(LayoutInflater.from(context).inflate(R.layout.list_item_account, parent, false));
-   }
- 
-   public class AccountViewHolder extends CoreViewHolder<Account> {
-      ...
-   }
-}
 ```
