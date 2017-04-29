@@ -19,20 +19,20 @@ Static app shortcuts are shortcuts that are defined via XML. This means they are
 Let's first look at how we can define a shortcut in XML:
 
 ```xml
-<?xml version="1.0" encoding="utf-8"?>
-<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
-    <shortcut
-        android:enabled="true"
-        android:icon="@mipmap/ic_launcher"
-        android:shortcutId="static_shortcut"
-        android:shortcutLongLabel="@string/static_shortcut_long_label"
-        android:shortcutShortLabel="@string/static_shortcut_short_label">
-        <intent
-            android:action="android.intent.action.VIEW"
-            android:targetClass="com.androidessence.appshortcuts.MainActivity"
-            android:targetPackage="com.androidessence.appshortcuts" />
-    </shortcut>
-</shortcuts>
+  <?xml version="1.0" encoding="utf-8"?>
+  <shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+      <shortcut
+          android:enabled="true"
+          android:icon="@mipmap/ic_launcher"
+          android:shortcutId="static_shortcut"
+          android:shortcutLongLabel="@string/static_shortcut_long_label"
+          android:shortcutShortLabel="@string/static_shortcut_short_label">
+          <intent
+              android:action="android.intent.action.VIEW"
+              android:targetClass="com.androidessence.appshortcuts.MainActivity"
+              android:targetPackage="com.androidessence.appshortcuts" />
+      </shortcut>
+  </shortcuts>
 ```
 
 The above snippet is in a file called shortcuts.xml inside the xml-v25 folder. The property names make this pretty straight forward, but here is a quick run down:
@@ -46,9 +46,9 @@ The above snippet is in a file called shortcuts.xml inside the xml-v25 folder. T
 In order for this shortcut to appear after a long press, though, we need to add some meta-data to our launcher activity. Find your default activity in your AndroidManifest.xml file, and add this information:
 
 ```xml
-<meta-data
-   android:name="android.app.shortcuts"
-   android:resource="@xml/shortcuts" />
+  <meta-data
+     android:name="android.app.shortcuts"
+     android:resource="@xml/shortcuts" />
 ```
 
 And that's it! You can run the app at this point and you should see a static shortcut appear.
@@ -60,21 +60,21 @@ Dynamic app shortcuts are added via Java code when your launcher activity is cre
 Creating a dynamic shortcut is very straightforward, while you may need to tweak this to create shortcuts specific to your app. To start, just use the [ShortcutInfo.Builder](https://developer.android.com/reference/android/content/pm/ShortcutInfo.html) class to create a shortcut like we did in XML:
 
 ```java
-Intent googleIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.google.com"));
+  Intent googleIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.google.com"));
 
-ShortcutInfo shortcut = new ShortcutInfo.Builder(this, "dynamic_shortcut")
-   .setShortLabel(getString(R.string.dynamic_shortcut_short_label))
-   .setLongLabel(getString(R.string.dynamic_shortcut_long_label))
-   .setIcon(Icon.createWithResource(this, R.mipmap.ic_launcher))
-   .setIntent(googleIntent)
-   .build();
+  ShortcutInfo shortcut = new ShortcutInfo.Builder(this, "dynamic_shortcut")
+     .setShortLabel(getString(R.string.dynamic_shortcut_short_label))
+     .setLongLabel(getString(R.string.dynamic_shortcut_long_label))
+     .setIcon(Icon.createWithResource(this, R.mipmap.ic_launcher))
+     .setIntent(googleIntent)
+     .build();
 ```
 
 Then, we can get our [ShortcutManager](https://developer.android.com/reference/android/content/pm/ShortcutManager.html) and add the shortcut:
 
 ```java
-ShortcutManager shortcutManager = getSystemService(ShortcutManager.class);
-shortcutManager.addDynamicShortcuts(Collections.singletonList(shortcut));
+  ShortcutManager shortcutManager = getSystemService(ShortcutManager.class);
+  shortcutManager.addDynamicShortcuts(Collections.singletonList(shortcut));
 ```
 
 Now you've created a dynamic app shortcut, too! If you run the app again, you will see this shortcut when you long press on the launcher icon as well. One thing to note, is that the icon we just made was inside the onCreate() method of our activity. That means it won't appear right after install, but it will appear after the user opens the app for the first time.

@@ -1,7 +1,7 @@
 ---
 layout: post
 modified: 2016-01-01
-title: Designing User Interface For Android Wear Part 1&#58; Lists
+title: Designing User Interfaces For Android Wear Part 1&#58; Lists
 tags: [android, android wear]
 categories: android
 published: true
