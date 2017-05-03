@@ -4,7 +4,7 @@ title: How To Use The RecyclerView Adapter
 description: This post explains how the RecyclerView.Adapter class is implemented.
 modified: 2015-09-17
 published: true
-tags: [android, recyclerview, adapter]
+tags: [recyclerview, adapter]
 categories: [android]
 ---
 

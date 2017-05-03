@@ -3,7 +3,7 @@ layout: post
 title: RecyclerViewCursorAdapter Library
 description: RecyclerViewCursorAdapter is a libary that brings the CursorAdapter to the Recyclerview.
 modified: 2015-12-10
-tags: [android, recyclerview, adapter, library]
+tags: [recyclerview, adapter, library]
 categories: [android]
 published: true
 ---

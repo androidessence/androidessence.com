@@ -3,7 +3,7 @@ layout: post
 modified: 2016-04-22
 title: MaterialSearchView Library
 published: true
-tags: [android, material design, library]
+tags: [material design, library]
 categories: android
 description: MaterialSearchView is a library that simulates the material design search from Google.
 ---

@@ -3,7 +3,7 @@ layout: post
 title: SQLiteOpenHelper and the Singleton Pattern
 description: Discussing the Singleton Pattern and it's benefits when used with SQLiteOpenHelper.
 modified: 2015-09-06
-tags: [android, sqlite, singleton pattern]
+tags: [sqlite, singleton pattern]
 categories: [android]
 ---
 

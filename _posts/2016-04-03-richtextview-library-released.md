@@ -4,7 +4,7 @@ title: RichTextView Library Released
 modified: 2016-04-03
 description: RichTextView provides SpanBuilder utils for a single TextView.
 published: true
-tags: [android, views, TextView, library]
+tags: [views, TextView, library]
 categories: android
 ---
 

@@ -3,7 +3,7 @@ layout: post
 modified: 2016-08-31
 title: RecyclerViewUtils Library Released
 published: true
-tags: [android, RecyclerView, library]
+tags: [RecyclerView, library]
 description: RecyclerViewUtils is a library that removes some of the RecyclerView boilerplate code.
 categories: Android
 ---

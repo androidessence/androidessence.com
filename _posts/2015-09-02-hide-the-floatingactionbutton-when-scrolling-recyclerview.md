@@ -4,7 +4,7 @@ title: Hide The FloatingActionButton When Scrolling A RecyclerView
 description: Tutorial on how to show and hide a FloatingActionButton when scrolling a RecyclerView.
 modified: 2015-09-02
 published: true
-tags: [android, recyclerview, floatingactionbutton]
+tags: [recyclerview, floatingactionbutton]
 categories: [android]
 ---
 

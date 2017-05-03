@@ -4,7 +4,7 @@ title: Swipe To Dismiss RecyclerView Items
 description: A tutorial on using the swipe-to-dismiss feature to remove items from a list in Android.
 modified: 2015-09-09
 published: true
-tags: [android, recyclerview, swipe to dismiss]
+tags: [recyclerview, swipe to dismiss]
 categories: [android]
 ---
 

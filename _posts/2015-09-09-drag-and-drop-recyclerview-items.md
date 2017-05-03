@@ -4,7 +4,7 @@ title: Drag And Drop RecyclerView Items
 description: Tutorial on how to use the drag and drop feature on a RecyclerView.
 modified: 2015-09-09
 published: true
-tags: [android, recyclerview, drag and drop]
+tags: [recyclerview, drag and drop]
 categories: [android]
 ---
 

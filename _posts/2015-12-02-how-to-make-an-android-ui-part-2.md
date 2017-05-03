@@ -3,7 +3,7 @@ layout: post
 title: How To Make An Android UI Part 2&#58; Java Code
 modified: 2015-12-02
 published: true
-tags: [android, ui]
+tags: [ui]
 categories: [android]
 ---
 

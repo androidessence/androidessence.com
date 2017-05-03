@@ -3,7 +3,7 @@ layout: post
 title: How To Make An Android UI Part 1&#58; XML and Views
 description: Understanding why Android uses XML for view design.
 modified: 2015-11-08
-tags: [android, ui, views]
+tags: [ui, views]
 categories: [android]
 ---
 

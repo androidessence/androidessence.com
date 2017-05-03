@@ -3,7 +3,7 @@ layout: post
 modified: 2016-01-26
 title: Designing User Interfaces For Android Wear Part 2&#58; Cards
 published: true
-tags: [android, android wear, cards, material design]
+tags: [android wear, cards, material design]
 categories: android
 description: Build Cards For Android Wear
 ---

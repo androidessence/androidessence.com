@@ -4,7 +4,7 @@ title: Using Elevation In Android Applications
 description: Discussion of some of the best ways to handle elevation in your Android application.
 modified: 2015-09-15
 published: true
-tags: [android, elevation, material design]
+tags: [elevation, material design]
 categories: [android]
 ---
 

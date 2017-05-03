@@ -4,7 +4,7 @@ title: Creating A Material Design Navigation Drawer
 description: An understanding of the Navigation Activity template from Android Studio.
 modified: 2015-10-11
 published: true
-tags: [android, material design, navigation drawer]
+tags: [material design, navigation drawer]
 categories: [android]
 ---
 

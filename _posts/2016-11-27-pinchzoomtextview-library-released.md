@@ -3,7 +3,7 @@ layout: post
 modified: 2016-11-27
 title: PinchZoomTextView Library Released
 published: true
-tags: [android, views]
+tags: [views]
 description: PinchZoomTextView is a library that allows you to increase/decrease the font size with a two finger gesture.
 categories: Android
 ---

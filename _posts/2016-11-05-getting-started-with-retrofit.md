@@ -3,7 +3,7 @@ layout: post
 modified: 2016-09-05
 title: Getting Started With Retrofit In Android
 published: true
-tags: [android, retrofit, networking]
+tags: [retrofit, networking]
 description: Retrofit is an HTTP client for networking in Android.
 categories: Android
 ---
