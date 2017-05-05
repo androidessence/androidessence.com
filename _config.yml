@@ -55,7 +55,7 @@ social:
   - title: "github"
     url: "https://github.com/AdamMc331"
   - title: "linkedin"
-    url: "https://blinkedin.com/in/AdamMc331"
+    url: "https://linkedin.com/in/AdamMc331"
 
 # Background image to be tiled on all pages
 background:
@@ -98,4 +98,4 @@ titlecase: true
 include: [".htaccess"]
 exclude: ["demo/*", "lib", "config.rb", "Capfile", "config", "Gemfile", "Gemfile.lock", "README.md", "LICENSE", "log", "Rakefile", "Rakefile.rb", "tmp", "less", "*.sublime-project", "*.sublime-workspace", "test", "spec", "Gruntfile.js", "package.json", "node_modules"]
 gems: [jekyll-paginate]
-#theme: neo-hpstr-jekyll-theme
+theme: neo-hpstr-jekyll-theme
