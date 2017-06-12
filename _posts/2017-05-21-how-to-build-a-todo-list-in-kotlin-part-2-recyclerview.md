@@ -104,14 +104,14 @@ Here we create an inner class that is a ViewHolder, it takes in a View that is p
 	    }
 
 	    inner class TaskViewHolder(view: View?) : RecyclerView.ViewHolder(view) {
-	        val descriptionTextView = view?.findViewById(R.id.task_description) as? TextView
-	        val completedCheckBox = view?.findViewById(R.id.task_completed) as? CheckBox
+	        val descriptionTextView = view?.findViewById(R.id.task_description) as TextView
+	        val completedCheckBox = view?.findViewById(R.id.task_completed) as CheckBox
 
 	        fun bindTask(task: Task) {
-	            descriptionTextView?.text = task.description
-	            completedCheckBox?.isChecked = task.completed
+	            descriptionTextView.text = task.description
+	            completedCheckBox.isChecked = task.completed
 
-	            completedCheckBox?.setOnCheckedChangeListener { buttonView, isChecked ->
+	            completedCheckBox.setOnCheckedChangeListener { buttonView, isChecked ->
 	                tasks[adapterPosition].completed = isChecked
 	            }
 	        }
@@ -143,11 +143,11 @@ Next we need to modify the `content_main.xml` file to include a RecyclerView:
 Now in our `MainActivity.kt` file we can add the following in `onCreate()`:
 
 ```kotlin
-	val recyclerView = findViewById(R.id.task_list) as? RecyclerView
+	val recyclerView = findViewById(R.id.task_list) as RecyclerView
 	val layoutManager = LinearLayoutManager(this)
 	val adapter = TaskAdapter(getSampleTasks())
-	recyclerView?.layoutManager = layoutManager
-	recyclerView?.adapter = adapter
+	recyclerView.layoutManager = layoutManager
+	recyclerView.adapter = adapter
 ```
 
 The `getSampleTasks()` method is a private method I've added just for testing:
@@ -160,6 +160,8 @@ The `getSampleTasks()` method is a private method I've added just for testing:
 	    return mutableListOf(task1, task2)
 	}
 ```
+
+Note: In this context it makes sense to have the adapter defined right before the RecyclerView, but later in the tutorial you'll want to have it defined at the class level of your activity.
 
 At this point, let's run our app and verify that our list appears. Following all of the above steps, this is what you can expect to see:
 

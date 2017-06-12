@@ -48,6 +48,13 @@ We'll just use a simple layout to avoid over-complicating the tutorial. I used t
 	</android.support.constraint.ConstraintLayout>
 ```
 
+The string resources are defined as:
+
+```xml
+	<string name="description">Description</string>
+	<string name="submit">Submit</string>
+```
+
 # Launch New Activity
 
 Before we implement the logic in this new activity, let's make the corresponding changes in `MainActivity.kt` to launch it. There's four things we need to do:
@@ -74,7 +81,7 @@ And here is what the MainActivity looks like with our new code added:
 	    var adapter: TaskAdapter? = TaskAdapter()
 
 	    override fun onCreate(savedInstanceState: Bundle?) {
-	        ...
+	        // ...
 
 	        val fab = findViewById(R.id.fab) as? FloatingActionButton
 	        fab?.setOnClickListener { _ ->
@@ -90,7 +97,7 @@ And here is what the MainActivity looks like with our new code added:
 	        }
 	    }
 
-	    ...
+	    // ...
 
 	    companion object {
 	    	private val ADD_TASK_REQUEST = 0
@@ -122,7 +129,7 @@ All of this code can be implemented in our `onCreate()` method:
 	        val submit = findViewById(R.id.submit) as? Button
 	        
 	        submit?.setOnClickListener { 
-	            if (description?.text?.toString().isNullOrEmpty()) {
+	            if (description?.text?.toString().isNullOrBlank()) {
 	                description?.error = "Please enter a description"
 	            } else {
 	                val data = Intent()

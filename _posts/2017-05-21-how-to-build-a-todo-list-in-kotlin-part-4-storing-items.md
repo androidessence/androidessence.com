@@ -14,7 +14,7 @@ If you've been following along with parts 1-3, you now have an (almost) working 
 
 # Storage Methods
 
-The first thing we need to do is implement a way to read and write tasks. We've already marked our tasks and serializable in part 2, so we can pass them into an ObjectOutputStream without a problem. I won't go too in depth into how the streams work, but here is the code required to read and write from the text file:
+The first thing we need to do is implement a way to read and write tasks. We've already marked our tasks as serializable in part 2, so we can pass them into an ObjectOutputStream without a problem. I won't go too in depth into how the streams work, but here is the code required to read and write from the text file:
 
 ```
 	object Storage {
@@ -98,6 +98,8 @@ The last thing we have to do is update our `MainActivity.kt` file to read from s
 	    Storage.writeData(this, adapter?.tasks)
 	}
 ```
+
+Note: When running this in Android Studio, you may notice that "tasks" is highlighted in onResume, stating "Smart cast to kotlin.collections.MutableList<com.package.Task>". The reason for this is because we never explicitly defined the type of "tasks", but it was inferred based on the return type of `readData()`. 
 
 The only piece of syntax that may look weird to you is the elvis operator (?:). This operator tries to return the first argument, and if it's null it will return the value that comes after. So in this example, if adapter or its tasks are null, it will return true. Otherwise, it returns the value of the `.isEmpty()` call.
 
