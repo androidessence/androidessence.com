@@ -92,7 +92,7 @@ There's a lot here, and I don't want this to be an ultra-detailed tutorial of th
 
 Now as great as this is, there's a few ways we can change the above code. Specifically:
 
-1. While Kotlin has nullability in the type system and shouldn't throw NPEs, it's not impossible. The `as` keyword forces a cast, and if one of our views fails to be cast correctly we could be in trouble. We'll fix that by using `as?` instead.
+1. While Kotlin has nullability in the type system and shouldn't throw NPEs, it's not impossible. The `as` keyword forces a cast, and if one of our views fails to be cast correctly we could be in trouble. We could fix that by using `as?` instead, but we'll keep it because if our views can't be cast properly, I would rather fail than hide the error.
 2. Once we do that, the inferred type for `fab` and `toolbar` will be `FloatingActionButton?` and `Toolbar?`, respectfully. Since they're optional, we'll have to add a safe operator where we set the click listener. See the Kotlin docs linked above for more.
 3. Using `when` inside `onOptionsItemSelected`. The `when` keyword in Kotlin replaces the `switch` statement in Java.
 
@@ -115,11 +115,11 @@ Once we make those changes and optimize imports, here is what our `MainActivity.
 	        super.onCreate(savedInstanceState)
 	        setContentView(R.layout.activity_main)
 	        
-	        val toolbar = findViewById(R.id.toolbar) as? Toolbar
+	        val toolbar = findViewById(R.id.toolbar) as Toolbar
 	        setSupportActionBar(toolbar)
 
-	        val fab = findViewById(R.id.fab) as? FloatingActionButton
-	        fab?.setOnClickListener { view ->
+	        val fab = findViewById(R.id.fab) as FloatingActionButton
+	        fab.setOnClickListener { view ->
 	            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
 	                    .setAction("Action", null).show()
 	        }
