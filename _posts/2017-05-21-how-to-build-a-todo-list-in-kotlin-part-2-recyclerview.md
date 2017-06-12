@@ -104,8 +104,8 @@ Here we create an inner class that is a ViewHolder, it takes in a View that is p
 	    }
 
 	    inner class TaskViewHolder(view: View?) : RecyclerView.ViewHolder(view) {
-	        val descriptionTextView = view.findViewById(R.id.task_description) as TextView
-	        val completedCheckBox = view.findViewById(R.id.task_completed) as CheckBox
+	        val descriptionTextView = view?.findViewById(R.id.task_description) as TextView
+	        val completedCheckBox = view?.findViewById(R.id.task_completed) as CheckBox
 
 	        fun bindTask(task: Task) {
 	            descriptionTextView.text = task.description
