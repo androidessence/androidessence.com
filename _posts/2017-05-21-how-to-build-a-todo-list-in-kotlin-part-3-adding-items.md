@@ -97,7 +97,7 @@ And here is what the MainActivity looks like with our new code added:
 	        }
 	    }
 
-	    ...
+	    // ...
 
 	    companion object {
 	    	private val ADD_TASK_REQUEST = 0
