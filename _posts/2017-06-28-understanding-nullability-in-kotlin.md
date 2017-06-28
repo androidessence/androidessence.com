@@ -145,4 +145,25 @@ Solution? [The lazy property](https://kotlinlang.org/docs/reference/delegated-pr
 	}
 ```
 
-I hope you found this a useful guide to Kotlin's nullability, and that you are able to see the benefits it provides, when to use it, and how to use it to your advantage. Have you run into any snags using nullability in Kotlin before, or know of other tips beyond the lazy property? Let us know in the comments!
+## Lateinit Property
+
+Similar to lazy, we can use the [lateinit](https://kotlinlang.org/docs/reference/properties.html#late-initialized-properties) keyword to define properties that will be initliazed outside of the constructor. The syntax looks similar to lazy, but you still need to initialize it at some point:
+
+```kotlin
+    class MyFragment : Fragment() {
+		lateinit var manager: MyAPIManager
+
+		@Override
+		public void onCreate(savedInstanceState: Bundle?) {
+			super.onCreate(savedInstanceState)
+
+                        manager = MyAPIManager(context)
+			manager.authorize()
+		}
+	}
+```
+
+This way, we can still declare the variable as non-nullable, and assign it *late*r when the time is right. However, we still are unable to access this field before it's assigned. If we do, though, an exception is thrown explaining that the field hasn't been initialized yet, which is slightly different from an NPE.
+
+
+I hope you found this a useful guide to Kotlin's nullability, and that you are able to see the benefits it provides, when to use it, and how to use it to your advantage. Have you run into any snags using nullability in Kotlin before, or know of other tips beyond the lazy/lateinit properties? Let us know in the comments!
