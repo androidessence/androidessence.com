@@ -167,4 +167,4 @@ I've left out some of the code for simplicity, but this demonstrates what I sugg
 
 That's all you need to implement the robot pattern for your tests. As linked above, Sam Edwards presentation from Droidcon 2016 goes into even deeper detail on how you can leverage this robot pattern for taking screenshots at each step of your tests. I hope you found this useful and this shows you that automated testing does not have to be as daunting as it sounds!
 
-The full code for a sample application can be found on [GitHub]().
+The full code for a sample application can be found on [GitHub](https://github.com/androidessence/EspressoSample).
