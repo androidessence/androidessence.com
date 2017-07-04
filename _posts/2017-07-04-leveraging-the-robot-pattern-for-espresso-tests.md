@@ -2,7 +2,7 @@
 layout: post
 title: Leveraging The Robot Pattern For Espresso Tests
 description: Demonstrates the benefits of the Robot pattern for automated testing in Android.
-modified: 2017-07-01
+modified: 2017-07-04
 published: true
 tags: [espresso, testing, robot pattern]
 categories: [android]
