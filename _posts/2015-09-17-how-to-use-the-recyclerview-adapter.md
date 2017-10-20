@@ -1,5 +1,6 @@
 ---
 layout: post
+author: adam
 title: How To Use The RecyclerView Adapter
 description: This post explains how the RecyclerView.Adapter class is implemented.
 modified: 2015-09-17

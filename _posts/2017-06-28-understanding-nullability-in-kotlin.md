@@ -1,5 +1,6 @@
 ---
 layout: post
+author: adam
 title: Understanding Nullability In Kotlin
 description: Explaining the benefits of nullability within Kotlin's type system.
 modified: 2017-06-28

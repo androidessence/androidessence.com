@@ -1,5 +1,6 @@
 ---
 layout: post
+author: adam
 title: App Review&#58;  DigiLux
 description: DigiLux allows the user to control the brightness of their phone screen with their fingerprint sensor.
 modified: 2017-10-09

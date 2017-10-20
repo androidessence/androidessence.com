@@ -1,5 +1,6 @@
 ---
 layout: post
+author: adam
 title: RecyclerViewCursorAdapter Library
 description: RecyclerViewCursorAdapter is a libary that brings the CursorAdapter to the Recyclerview.
 modified: 2015-12-10

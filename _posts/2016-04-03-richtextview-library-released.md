@@ -1,5 +1,6 @@
 ---
 layout: post
+author: adam
 title: RichTextView Library Released
 modified: 2016-04-03
 description: RichTextView provides SpanBuilder utils for a single TextView.

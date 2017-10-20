@@ -1,5 +1,6 @@
 ---
 layout: post
+author: adam
 title: Top 5 Color Scheme Tools
 modified: 2015-09-21
 published: true

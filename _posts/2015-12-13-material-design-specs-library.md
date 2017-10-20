@@ -1,5 +1,6 @@
 ---
 layout: post
+author: adam
 title: Material Design Specs Library
 description: Material Design Specs library contains all of your material design color palettes.
 modified: 2015-12-13

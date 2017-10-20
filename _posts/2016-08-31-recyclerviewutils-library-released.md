@@ -1,5 +1,6 @@
 ---
 layout: post
+author: adam
 modified: 2016-08-31
 title: RecyclerViewUtils Library Released
 published: true
