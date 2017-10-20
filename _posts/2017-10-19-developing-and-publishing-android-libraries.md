@@ -2,8 +2,8 @@
 layout: post
 title: Developing And Publishing Android Libraries
 description: Step-by-step guide to developing an Android library and publishing it to JCenter.
-modified: 2017-10-08
-published: false
+modified: 2017-10-19
+published: true
 tags: [library]
 categories: [android]
 ---
@@ -114,4 +114,21 @@ Last, you need to generate the zip file that will be uploaded to Bintray. You ca
 	./gradlew clean build generateRelease
 ```
 
-Now you'll find in your build folder a file with a name of ""
+Now you'll find in your lib/build folder a file with a name of `release-x.y.z.zip` which contains everything you'll need to upload.
+
+## Bintray Upload
+
+Once you've generated the zip file, the remaining steps are just a tedious upload:
+
+1. Sign in to Bintray.
+2. Select your maven repository.
+3. Click the 'Add New Package' button.
+4. Enter the required info and click submit.
+5. Select this package, and on the right side you'll have a button to add a new version.
+![AndroidEssence](/images/library/version.png)
+6. Enter all the additional info and hit submit.
+7. Select that version, and use the file uploader on the right. Make sure to select "explode this archive".
+![AndroidEssence](/images/library/files.png)
+![AndroidEssence](/images/library/explode.png)
+8. You're done! People can now access your projects from your maven repo. If you want to link it to Jcenter, select your package and you'll see a "Link To Jcenter" option at the bottom right.
+![AndroidEssence](/images/library/jcenter.png)
