@@ -12,6 +12,8 @@ Third party libraries are a huge part of mobile app development. Popular tools l
 
 However, developing and publishing these libraries can be intimidating to many people. I think this occurs for a number of reasons - worry about keeping up with maintenance, being outshined, or sometimes thinking no one would use your code. I have many thoughts on those ideas, but will save them for another blog post. In this one, we'll just go over a step by step guide to creating and publishing a library to JCenter.
 
+<!--more-->
+
 # Creating the library module
 
 ## App Module
