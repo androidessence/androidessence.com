@@ -78,8 +78,8 @@ Once you've added yourself as an author, and written your post, it's time to tes
 First, go into the `_config.yml` file and update the url to point to your localhost, instead of the production site, by uncommenting this first line and commenting the second:
 
 ```markdown
-	# url: http://localhost:4000
-	url: https://androidessence.com
+	url: http://localhost:4000
+	# url: https://androidessence.com
 ```
 
 I recommend following the [Jekyll Quick Start](https://jekyllrb.com/docs/quickstart/) guide to install everything, then navigate to the website repo and run the command `bundle exec jekyll serve`. From there you'll be able to navigate to `http://localhost:4000` in your browser and view the site. Here, you should follow each step:
