@@ -4,7 +4,7 @@ title: About
 share: true
 ---
 
-# About Android Essnece
+# About Android Essence
 
 Android Essence is an Android developers blog full of various tutorials and discussions. It started as a user interface (UI) focussed blog, but has expanded into general Android development.
 
