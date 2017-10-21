@@ -14,7 +14,15 @@
       </li>
       {% for menu in site.menu reversed %}
         {% assign class = nil %}
-        {% if ((page.url contains menu.url and menu.url != '/') or (page.url == '/index.html' and menu.url == '/')) %}
+        {% capture sub_string %}{{menu.url}}{% endcapture %}
+        {% capture some_string %}{{page.url}}{% endcapture %}
+
+        {% assign sub_string_size = sub_string | size %}
+        {% assign some_string_size = some_string | size %}
+        {% assign start_index = some_string_size | minus: sub_string_size %}
+        {% assign result = some_string | slice: start_index, sub_string_size %}
+
+        {% if ((result == sub_string and menu.url != '/') or (page.url == '/index.html' and menu.url == '/')) %}
           {% assign class = 'active' %}
         {% endif %}
 
