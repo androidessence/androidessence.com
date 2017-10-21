@@ -1,7 +1,7 @@
 ---
 layout: post
 author: adam
-title: Authors Wanted
+title: Guest Authors Wanted
 description: Android Essence is looking for more developers interested in contributing to the product.
 modified: 2017-10-21
 published: true
