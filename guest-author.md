@@ -22,14 +22,14 @@ Before you can contribute, you'll need to [fork the repository](https://help.git
 
 Within the repository, in the `_data` directory we have an `authors.yml` file. In order to reference your author from the post, you'll need to create a record here. The format is as follows:
 
-```yaml
+```markdown
 	adam:
-	  name: Adam McNeilly
-	  site: https://www.adammcneilly.com
-	  avatar: images/avatars/adam.jpg
-	  bio: "Software Engineer and Android development enthusiast."
-	  github: AdamMc331
-	  twitter: AdamMc331
+		name: Adam McNeilly
+		site: https://www.adammcneilly.com
+		avatar: images/avatars/adam.jpg
+		bio: "Software Engineer and Android development enthusiast."
+		github: AdamMc331
+		twitter: AdamMc331
 ```
 
 If you don't want to supply a GitHub or Twitter handle you don't have to - the follow buttons will simply be excluded. All that is required is that you replace `adam:` with your name, and replace all of the necessary attributes with your own information.
@@ -77,7 +77,7 @@ Once you've added yourself as an author, and written your post, it's time to tes
 
 First, go into the `_config.yml` file and update the url to point to your localhost, instead of the production site, by uncommenting this first line and commenting the second:
 
-```yaml
+```markdown
 	# url: http://localhost:4000
 	url: https://androidessence.com
 ```
