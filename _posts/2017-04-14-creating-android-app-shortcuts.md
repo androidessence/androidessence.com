@@ -1,5 +1,6 @@
 ---
 layout: post
+author: adam
 modified: 2017-04-14
 title: Creating Android App Shortcuts
 published: true

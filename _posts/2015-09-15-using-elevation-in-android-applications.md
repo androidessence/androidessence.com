@@ -1,5 +1,6 @@
 ---
 layout: post
+author: adam
 title: Using Elevation In Android Applications
 description: Discussion of some of the best ways to handle elevation in your Android application.
 modified: 2015-09-15

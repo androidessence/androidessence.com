@@ -1,5 +1,6 @@
 ---
 layout: post
+author: adam
 title: Maintain Library Versions Across Modules
 description: How to use gradle to keep consistent library versioning across modules in your project.
 modfied: 2017-05-05

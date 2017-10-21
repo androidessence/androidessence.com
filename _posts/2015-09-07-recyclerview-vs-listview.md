@@ -1,5 +1,6 @@
 ---
 layout: post
+author: adam
 title: RecyclerView VS ListView
 description: Understanding what the difference is between a RecyclerView and a ListView.
 modified: 2015-09-07

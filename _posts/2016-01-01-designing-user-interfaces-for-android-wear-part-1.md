@@ -1,5 +1,6 @@
 ---
 layout: post
+author: adam
 modified: 2016-01-01
 title: Designing User Interfaces For Android Wear Part 1&#58; Lists
 tags: [android wear]

@@ -1,5 +1,6 @@
 ---
 layout: post
+author: adam
 modified: 2016-09-05
 title: Getting Started With Retrofit In Android
 published: true

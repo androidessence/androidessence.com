@@ -22,6 +22,8 @@ menu:
     url: '/'
   - title: 'Tags'
     url: '/tags'
+  - title: 'Write For Us'
+    url: '/guest-author'
   # - title: 'Categories'
   #   url: '/categories'
   #   type: 'categories'
@@ -37,24 +39,8 @@ menu:
 owner:
   name: Adam McNeilly
   site: http://adammcneilly.com
-  avatar: images/avatar.jpg
-  bio: "Computer Engineering graduate from Oakland University and lover of all things Android."
-  email: adam@androidessence.com
   # Twitter nick for use in Twitter cards and follow button.
   twitter: AdamMc331 # if no twitter in this config, the twitter follow button will be removed
-  # GitHub nick for use in follow button in author block.
-  github: AdamMc331
-
-# Twitter account associated with the site if different from owner/author twitter account.
-# Used in Twitter cards.
-twitter:
-
-# Social networking links used in author block underneath posts. Update and remove as you like.
-social:
-  - title: "github"
-    url: "https://github.com/AdamMc331"
-  - title: "linkedin"
-    url: "https://linkedin.com/in/AdamMcNeilly"
 
 # Background image to be tiled on all pages
 background:

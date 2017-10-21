@@ -1,5 +1,6 @@
 ---
 layout: post
+author: adam
 title: Developing And Publishing Android Libraries
 description: Step-by-step guide to developing an Android library and publishing it to JCenter.
 modified: 2017-10-19

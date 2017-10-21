@@ -1,5 +1,6 @@
 ---
 layout: post
+author: adam
 modified: 2016-01-26
 title: Designing User Interfaces For Android Wear Part 2&#58; Cards
 published: true

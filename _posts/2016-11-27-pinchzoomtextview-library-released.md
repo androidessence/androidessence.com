@@ -1,5 +1,6 @@
 ---
 layout: post
+author: adam
 modified: 2016-11-27
 title: PinchZoomTextView Library Released
 published: true

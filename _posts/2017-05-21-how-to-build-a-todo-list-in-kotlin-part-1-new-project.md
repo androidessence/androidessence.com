@@ -1,5 +1,6 @@
 ---
 layout: post
+author: adam
 title: How To Build A Todo List In Kotlin Part 1&#58; Creating A New Project
 description: Discusses the building of a simple todo list application in Kotlin.
 modified: 2017-05-21

@@ -1,5 +1,6 @@
 ---
 layout: post
+author: adam
 modified: 2016-04-22
 title: MaterialSearchView Library
 published: true

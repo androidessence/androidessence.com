@@ -1,5 +1,6 @@
 ---
 layout: post
+author: adam
 title: How To Make An Android UI Part 2&#58; Java Code
 modified: 2015-12-02
 published: true

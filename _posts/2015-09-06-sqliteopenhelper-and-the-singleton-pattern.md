@@ -1,5 +1,6 @@
 ---
 layout: post
+author: adam
 title: SQLiteOpenHelper and the Singleton Pattern
 description: Discussing the Singleton Pattern and it's benefits when used with SQLiteOpenHelper.
 modified: 2015-09-06
