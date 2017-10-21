@@ -92,6 +92,6 @@ I recommend following the [Jekyll Quick Start](https://jekyllrb.com/docs/quickst
 
 Once you've done all that, commit your code and [submit a pull request](https://help.github.com/articles/about-pull-requests/) to the main repository. From there I will be reviewing all new content, and merging it myself. I will also handle updating the website once posts are merged. If you have specific concerns about a post going live on a certain date, or any other considerations, please leave them in your PR comments.
 
-## Aside
+## Updates
 
-This guest author page was rolled out on October 21, 2017. There is currently no support for individual author pages, but is slated as an update for the future. If you follow all of the steps above, though, your posts will be retroactively included in these pages whenever they're created.
+You can find all status updates related to the guest author feature on the [official blog post]({{ site.baseurl }}{% link _posts/2017-10-21-guest-authors-wanted.md %}) for it. 
