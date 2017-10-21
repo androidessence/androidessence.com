@@ -4,33 +4,10 @@ title: About
 share: true
 ---
 
-# Neo-HPSTR Jekyll Theme
+# About Android Essnece
 
-Neo-HPSTR Jekyll is a responsive and modern blog template.
+Android Essence is an Android developers blog full of various tutorials and discussions. It started as a user interface (UI) focussed blog, but has expanded into general Android development.
 
-# Live Demo
+## History
 
-You can see it running [here](http://blog.rhesoft.com/) and [here](http://aronbordin.com/neo-hpstr-jekyll-theme/).
-
-
-## What Neo-HPSTR brings to the table:
-
-* Modern design.
-* Responsive templates for post, page, and post index `_layouts`. Looks great on mobile, tablet, and desktop devices.
-* Gracefully degrades in older browsers. Compatible with Internet Explorer 8+ and all modern browsers.  
-* Sweet topbar animated menu with support for drop-downs.
-* Optional [Disqus](http://disqus.com) comments and social sharing links.
-* [Open Graph](https://developers.facebook.com/docs/opengraph/) and [Twitter Cards](https://dev.twitter.com/docs/cards) support for a better social sharing experience.
-* Simple [custom 404 page](http://mmistakes.github.io/hpstr-jekyll-theme/404.html) to get you started.
-* Stylesheets for Pygments and Coderay [syntax highlighting](http://mmistakes.github.io/hpstr-jekyll-theme/code-highlighting-post/) to make your code examples look snazzy
-* Author panel, with social links
-* Read more tag support(similar with Wordpress ).
-
-![Preview](http://aronbordin.com/images/neo-hpstr-jekyll-theme-preview.png)
-
-
----
-
-## Getting Started
-
-Neo-HPSTR takes advantage of Sass and data files to make customizing easier. These features require Jekyll 2.x and will not work with older versions of Jekyll.
+Android Essence was first launched on September 2, 2015 by, [Adam McNeilly](http://adammcneilly.com). As the content and reach of the blog grew, Adam decided to open up the blog to [guest authors](https://androidessence.com/guest-author) in October, 2017.

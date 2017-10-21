@@ -22,6 +22,8 @@ menu:
     url: '/'
   - title: 'Tags'
     url: '/tags'
+  - title: 'Write For Us'
+    url: '/guest-author'
   # - title: 'Categories'
   #   url: '/categories'
   #   type: 'categories'
