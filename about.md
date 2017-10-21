@@ -10,4 +10,4 @@ Android Essence is an Android developers blog full of various tutorials and disc
 
 ## History
 
-Android Essence was first launched on September 2, 2015 by, [Adam McNeilly](http://adammcneilly.com). As the content and reach of the blog grew, Adam decided to open up the blog to [guest authors](https://androidessence.com/guest-author) in October, 2017.
+Android Essence was first launched on September 2, 2015 by, [Adam McNeilly](http://adammcneilly.com). As the content and reach of the blog grew, Adam decided to open up the blog to [guest authors]({{site.url}}/guest-author) in October, 2017.
