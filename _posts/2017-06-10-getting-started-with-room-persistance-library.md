@@ -13,6 +13,10 @@ This year at Google I/O, the Android team announced [Android Architecture Compon
 
 <!--more--> 
 
+## Update
+
+I am leaving this information for legacy sake, but about a year after this was published I wrote [again]({{ site.baseurl }}{% link _posts/2018-05-31-breaking-the-buzzwords-barrier-room-rx-repository.md %}) on the topic, including some new info and a little nice Kotlin syntax.
+
 # Project Setup
 
 First, add the following dependencies to your app's `build.gradle` file. The Kotlin dependency is optional, but it's the language I'll be using for this tutorial.
