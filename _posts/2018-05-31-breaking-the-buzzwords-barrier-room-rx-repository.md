@@ -89,7 +89,7 @@ If you chose to [export schemas](https://developer.android.com/reference/android
 	}
 ```
 
-An important thing to note, is that the class name is what is automatically used as the table name, unless annotated otherwise. In Cash Caretaker, we naturally want a class called a `Transaction`, representing a financial one, but we can't have a `Transaction` table as that's a reserved SQLite keyboard. So in some cases you want to add the table name to your annotation (this example also shows how you can have foreign keys as well):
+An important thing to note, is that the class name is what is automatically used as the table name, unless annotated otherwise. In Cash Caretaker, we naturally want a class called a `Transaction`, representing a financial one, but we can't have a `Transaction` table as that's a reserved SQLite keyword. So in some cases you want to add the table name to your annotation (this example also shows how you can have foreign keys as well):
 
 ```kotlin
 	@Parcelize
