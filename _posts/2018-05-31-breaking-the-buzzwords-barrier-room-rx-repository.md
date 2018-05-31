@@ -25,9 +25,9 @@ Let's start with persistence.
 
 <!--more-->
 
-# Room Persistance Library
+# Room Persistence Library
 
-I've already written once about the [room persistance library]({{ site.baseurl }}{% link _posts/2017-06-10-getting-started-with-room-persistance-library.md %}) which was announced at Google I/O 2017. Feel free to skim that over for some details, but I'm going to revisit a lot of it here, as I've learned much more about Room/Kotlin over the last year, and I think this will be more relevant.
+I've already written once about the [room persistence library]({{ site.baseurl }}{% link _posts/2017-06-10-getting-started-with-room-persistance-library.md %}) which was announced at Google I/O 2017. Feel free to skim that over for some details, but I'm going to revisit a lot of it here, as I've learned much more about Room/Kotlin over the last year, and I think this will be more relevant.
 
 ## Purpose
 
