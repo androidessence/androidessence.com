@@ -31,7 +31,7 @@ I've already written once about the [room persistence library]({{ site.baseurl }
 
 ## Purpose
 
-I mentioned in the [intro post]({{ site.baseurl }}{% link _posts/2018-05-30-breaking-the-buzzwords-barrier.md %}) that I would go over the necessity of each buzzword. Room was created as [an abstraction over SQLite](https://developer.android.com/topic/libraries/architecture/room) to make working with a SQLite database on Android even easier for developers. The ability has always existed - but previously we had to write all of the table schema ourselves, handle upgrades (now simpler with [migrations](https://developer.android.com/training/data-storage/room/migrating-db-versions)), and write our own queries and read from cursor objects, and much more I've probably forgotten about. 
+I mentioned in the [intro post]({{ site.baseurl }}{% link _posts/2018-05-29-breaking-the-buzzwords-barrier.md %}) that I would go over the necessity of each buzzword. Room was created as [an abstraction over SQLite](https://developer.android.com/topic/libraries/architecture/room) to make working with a SQLite database on Android even easier for developers. The ability has always existed - but previously we had to write all of the table schema ourselves, handle upgrades (now simpler with [migrations](https://developer.android.com/training/data-storage/room/migrating-db-versions)), and write our own queries and read from cursor objects, and much more I've probably forgotten about. 
 
 As a result of all of this verbose, boilerplate, and often repetitive code, the developers over at Google sought out to make this easier for us, and they've nailed it. I won't be comparing Room to previous options, but trust me that what you're about to see is smoother than it was.
 
