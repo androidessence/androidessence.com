@@ -1,15 +1,15 @@
 ---
 layout: post
 author: adam
-title: Getting Started With Room Persistance Library
-description: Teaches how to build a todo list using Room Persistance Library
+title: Getting Started With Room Persistence Library
+description: Teaches how to build a todo list using Room Persistence Library
 modified: 2017-06-10
 published: true
 tags: [kotlin, room, sqlite]
 categories: [android]
 ---
 
-This year at Google I/O, the Android team announced [Android Architecture Components](https://developer.android.com/topic/libraries/architecture/index.html) a combination of new, helpful libraries for Android development. One that particularly interested me was the [Room Persistance Library](https://developer.android.com/topic/libraries/architecture/room.html), which is an abstraction layer of SQLite designed to make database access and creation a lot easier. Right off the bat it reminded me of [Realm](https://realm.io/products/realm-mobile-database/), which I learned about at [Droidcon NYC](https://www.youtube.com/watch?v=QT7XD1hifkU) and really admired, so I decided to dive in and build a todo list using Room & RxJava.
+This year at Google I/O, the Android team announced [Android Architecture Components](https://developer.android.com/topic/libraries/architecture/index.html) a combination of new, helpful libraries for Android development. One that particularly interested me was the [Room Persistence Library](https://developer.android.com/topic/libraries/architecture/room.html), which is an abstraction layer of SQLite designed to make database access and creation a lot easier. Right off the bat it reminded me of [Realm](https://realm.io/products/realm-mobile-database/), which I learned about at [Droidcon NYC](https://www.youtube.com/watch?v=QT7XD1hifkU) and really admired, so I decided to dive in and build a todo list using Room & RxJava.
 
 <!--more--> 
 
