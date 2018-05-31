@@ -27,7 +27,7 @@ Let's start with persistence.
 
 # Room Persistance Library
 
-I've already written once about the [room persistance library]({{ site.baseurl }}{% link _posts/2017-06-10-getting-started-with-room-persistance-library.md %}) which was announced at Google I/O 2017. Feel free to skim that over for some details, but I'm going to go over some of the details here (I've learned a lot more Room/Kotlin in the last calendar year). 
+I've already written once about the [room persistance library]({{ site.baseurl }}{% link _posts/2017-06-10-getting-started-with-room-persistance-library.md %}) which was announced at Google I/O 2017. Feel free to skim that over for some details, but I'm going to revisit a lot of it here, as I've learned much more about Room/Kotlin over the last year, and I think this will be more relevant.
 
 ## Purpose
 
@@ -245,24 +245,24 @@ For those of you coming from an MVP background, it works like an [interactor](ht
 For the purpose of this app, the repository will behave in a number of cases like a proxy straight through to the database - but it can also be used for some intermediate mapping where necessary! Let's look at our account examples:
 
 ```kotlin
-open class CCRepository(private val database: CCDatabase) {
-    private val accountDAO: AccountDAO = database.accountDao()
+	open class CCRepository(private val database: CCDatabase) {
+	    private val accountDAO: AccountDAO = database.accountDao()
 
-    fun getAllAccounts(): Flowable<DataViewState> = accountDAO.getAll()
-            .map {
-                if (it.isEmpty()) {
-                    DataViewState.Empty()
-                } else {
-                    DataViewState.Success(it)
-                }
-            }
+	    fun getAllAccounts(): Flowable<DataViewState> = accountDAO.getAll()
+	            .map {
+	                if (it.isEmpty()) {
+	                    DataViewState.Empty()
+	                } else {
+	                    DataViewState.Success(it)
+	                }
+	            }
 
-    fun deleteAccount(account: Account): Int = accountDAO.delete(account)
+	    fun deleteAccount(account: Account): Int = accountDAO.delete(account)
 
-    fun insertAccount(account: Account): Long = accountDAO.insert(account)
+	    fun insertAccount(account: Account): Long = accountDAO.insert(account)
 
-    ...
-}
+	    ...
+	}
 ```
 
 In the case of deleting and inserting an account, we just return whatever the database wants. However, when I query for accounts, I don't want to return the list of accounts, but rather a state that my ViewModel can be in.

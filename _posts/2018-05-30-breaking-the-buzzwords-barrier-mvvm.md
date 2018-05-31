@@ -55,4 +55,4 @@ We'll briefly break down each block, but go over each part in more detail in lat
 
 I hope this was helpful in understanding the MVVM architecture a little better, and why it's important!
 
-You can head on over to [part 2]({{ site.baseurl }}{% link _posts/2018-05-30-breaking-the-buzzwords-barrier-room-rx-repository.md %}) to learn more about the 'R' buzzwords.
+You can head on over to [part 2]({{ site.baseurl }}{% link _posts/2018-05-31-breaking-the-buzzwords-barrier-room-rx-repository.md %}) to learn more about the 'R' buzzwords.
