@@ -108,7 +108,7 @@ An important thing to note, is that the class name is what is automatically used
 
 Once we've created our entity, we need to create a Database Access Object (DAO). Our DAO is what we use to write our insert/update/query functionality.
 
-Fortunately, we have annotations for Insert/Update already, but if you want to write a special query (even if it's for deleting, not necessarily a select query), you can do that as well. Below is an example of some options, but you can find more info [in the official documentation](https://developer.android.com/training/data-storage/room/accessing-data):
+Fortunately, we have annotations for Insert/Update/Delete already, but if you want to write a special query (even if it's for deleting, not necessarily a select query), you can do that as well. Below is an example of some options, but you can find more info [in the official documentation](https://developer.android.com/training/data-storage/room/accessing-data):
 
 ```kotlin
 	@Dao
