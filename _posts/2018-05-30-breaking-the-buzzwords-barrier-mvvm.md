@@ -51,4 +51,8 @@ We'll briefly break down each block, but go over each part in more detail in lat
  - The CC Repository is a middle man between the ViewModel and the Database. This is necessary because I may consider swapping out the database for a server, but the necessary calls and connection with the ViewModel shouldn't have to change.
  - The CC Database is the local SQLite database on the phone, which pulls all of the information that is saved between sessions. 
 
-I hope this was helpful in understanding the MVVM architecture a little better, and why it's important! Keep an eye out for the upcoming posts for a better understanding of what each of these components actually looks like. 
+# Conclusion
+
+I hope this was helpful in understanding the MVVM architecture a little better, and why it's important!
+
+You can head on over to [part 2]({{ site.baseurl }}{% link _posts/2018-05-30-breaking-the-buzzwords-barrier-room-rx-repository.md %}) to learn more about the 'R' buzzwords.
