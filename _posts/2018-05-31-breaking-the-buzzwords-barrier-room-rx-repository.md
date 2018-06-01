@@ -275,4 +275,4 @@ If you're unfamiliar with the RxJava map operator, you can learn more [here](htt
 
 I hope this helped you understand a few 'R' buzzwords - Room/RxJava/Repositories. Still confused? Unsure what their purposes are? Let me know in the comments and I'll be sure to clarify!
 
-Keep an eye out for part 3 coming soon, which will go over the ViewModel, and the differences between an Android ViewModel and the ViewModel we talk about in MVVM. 
+Now you can head over to [part 3]({{ site.baseurl }}{% link _posts/2018-06-01-breaking-the-buzzwords-barrier-viewmodel.md %}), which will go over the ViewModel, and the differences between an Android ViewModel and the ViewModel we talk about in MVVM. 
