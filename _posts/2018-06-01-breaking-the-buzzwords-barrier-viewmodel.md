@@ -58,6 +58,8 @@ As I go over these buzzwords, I also want to show the implementation where it's 
 2. The ViewModel interracts with the Repository we made in the last section to fetch data. It also checks to make sure it's not pulling data redundently.
 3. The ViewModel also manages a [CompositeDisposable](http://reactivex.io/RxJava/javadoc/io/reactivex/disposables/CompositeDisposable.html) which holds our network subscription, and clears the network subscription when our ViewModel is cleared. This is to avoid memory leaks if there's a long running request.
 
+If you don't understand the RxJava code below, head back to [part 2]({{ site.baseurl }}{% link _posts/2018-05-31-breaking-the-buzzwords-barrier-room-rx-repository.md %}) for some notes and links to external resources.
+
 ```kotlin
 	class AccountViewModel(private val repository: CCRepository) : ViewModel() {
 	    private val compositeDisposable = CompositeDisposable()
@@ -93,6 +95,33 @@ As I go over these buzzwords, I also want to show the implementation where it's 
 ```
 
 Because this survives orientation changes, and because we do a state check before pulling accounts, we can save ourselves from unnecessarily requesting data every time the user rotates their phone, and instead only when the view (and ViewModel) are created for the first time. 
+
+## Factory
+
+Instantiating your ViewModel from inside your activity or fragment can be pretty easy:
+
+```kotlin
+val viewModel = ViewModelProviders.of(this).get(MyViewModel::class.java)
+```
+
+However, you may notice in the above example, we don't have any way to call a constructor. Unfortunately, there aren't any examples in the documentation, but you can do this using a [ViewModelProvider.Factory](https://developer.android.com/reference/android/arch/lifecycle/ViewModelProvider.Factory). There is an [explanation by Mohit Sharma](https://android.jlelse.eu/android-viewmodel-with-custom-arguments-d0ff0fba29e1) that is quick and to the point.
+
+You can create an instance of this factory using an anonymous class, create your ViewModel with the constructor, and then return that. Here is an example from Cash Caretaker:
+
+```kotlin
+val viewModelFactory: ViewModelProvider.Factory by lazy {
+    object : ViewModelProvider.Factory {
+        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+            val database = CCDatabase.getInMemoryDatabase(context!!)
+            val repository = CCRepository(database)
+
+            return AccountViewModel(repository) as T
+        }
+    }
+}
+
+val viewModel = ViewModelProviders.of(this, viewModelFactory).get(AccountViewModel::class.java)
+```
 
 # Conclusion
 
