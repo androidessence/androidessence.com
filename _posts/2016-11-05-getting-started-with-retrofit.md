@@ -1,7 +1,7 @@
 ---
 layout: post
 author: adam
-modified: 2016-09-05
+modified: 2018-10-13
 title: Getting Started With Retrofit In Android
 published: true
 tags: [retrofit, networking]
@@ -18,11 +18,11 @@ As a new or intermediate Android developer, getting started with [Retrofit](http
 First things first, include the following dependencies in your build.gradle file. These are for the retrofit library, as well as a GSON converter which is responsible for converting the JSON response from the server into your plain old Java object (POJO).
 
 ```groovy
-    compile 'com.squareup.retrofit2:retrofit:2.1.0'
-    compile 'com.squareup.retrofit2:converter-gson:2.1.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.4.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
 ```
 
-# Define your model(s)
+# Define Your Model(s)
 
 Next, we need to define the models that will be returned from the server. In this example, we will be returning a list of people that are presidents. Each person is represented in the following way:
 
@@ -76,7 +76,7 @@ Which has the corresponding JSON response:
     }
 ```
 
-# Create a service interface
+# Create A Service Interface
 
 Next, we need to create an interface that is responsible for communicating with our API, which will look like this:
 
@@ -98,7 +98,9 @@ Next, we need to create an interface that is responsible for communicating with 
 
 At the bottom we create a Retrofit object which has the base URL of our API, and add the GSOn converter mentioned in the beginning. There is also a method for each call we can make to our API. In the first one we have a call that returns a presidents object, and the annotation is what defines that this is a GET request, and provides the additional path beyond the base url.
 
-# Implement the interface
+**Note:** `Call` is a common class name. Depending on your dependencies (sorry), you may need to be careful about what class you import here. Make sure it is `retrofit2.Call`.
+
+# Implement The Interface
 
 Now that we've defined our model, and our API calls, we can implement them in code in roughly three steps:
 
@@ -128,5 +130,7 @@ Here is what the code for that looks like. Note that a Retrofit callback has two
         });
     }
 ```
+
+**Note:** `Call` is a common class name. Depending on your dependencies (sorry), you may need to be careful about what class you import here. Make sure it is `retrofit2.Call`.
 
 And that's it! Just like that you are getting started with Retrofit. The full sample code for this project can be found on [GitHub](https://github.com/androidessence/RetrofitSample).
