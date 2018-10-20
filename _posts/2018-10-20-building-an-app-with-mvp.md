@@ -181,7 +181,7 @@ class TaskListPresenter(
 }
 ```
 
-The key take aways:
+The key takeaways:
 
 * The presenter has a reference to the model and view so it can communicate with them. 
 * The model and view are passed in via the constructor. This allows for easy unit testing, which we'll see later. It also abides by this separation of concerns pattern, clarifying the presenter doesn't care about the implementation of the view and model, but just knowing that it must have the behavior defined by each in the contract class.
