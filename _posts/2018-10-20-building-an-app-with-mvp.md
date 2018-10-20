@@ -189,4 +189,4 @@ The key take aways:
 
 # More
 
-For a full sample of the MVP pattern on multiple features, check out the sample code in [GitHub](https://github.com/AdamMc331/todo-monorepo/tree/master/todo-mvp). Let's dive in to testing, next. 
+For a full sample of the MVP pattern on multiple features, check out the sample code in [GitHub](https://github.com/AdamMc331/todo-monorepo/tree/master/todo-mvp).
