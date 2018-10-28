@@ -39,7 +39,7 @@ The Android class is directly related to that. It's a class that maintains state
 
 Now that we have the components defined, let's dive into the MVVM communication flow. We'll go a step further and compare it to MVP, our last example.
 
-![](images/mvvm.png)
+![](/images/mvvm.png)
 
 This image came from [Wikipedia](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93viewmodel).
 
