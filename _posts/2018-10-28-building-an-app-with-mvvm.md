@@ -54,22 +54,22 @@ Now, let's dive into building our todo-list app with this architecture.
 Our model between the two projects doesn't actually change here. In the last example it had to extend from our contract class, but here, we can just have a standalone repository to use with dummy data.
 
 ```kotlin
-open class TaskRepository {
-    open fun getItems(): List<BaseTask> {
-        return listOf(
-                BaseTask("Sample task 1"),
-                BaseTask("Sample task 2"),
-                BaseTask("Sample task 3"),
-                BaseTask("Sample task 4"),
-                BaseTask("Sample task 5"),
-                BaseTask("Sample task 6"),
-                BaseTask("Sample task 7"),
-                BaseTask("Sample task 8"),
-                BaseTask("Sample task 9"),
-                BaseTask("Sample task 10")
-        )
+    open class TaskRepository {
+        open fun getItems(): List<BaseTask> {
+            return listOf(
+                    BaseTask("Sample task 1"),
+                    BaseTask("Sample task 2"),
+                    BaseTask("Sample task 3"),
+                    BaseTask("Sample task 4"),
+                    BaseTask("Sample task 5"),
+                    BaseTask("Sample task 6"),
+                    BaseTask("Sample task 7"),
+                    BaseTask("Sample task 8"),
+                    BaseTask("Sample task 9"),
+                    BaseTask("Sample task 10")
+            )
+        }
     }
-}
 ```
 
 # ViewModel
@@ -84,27 +84,27 @@ Before we show our code for the ViewModel, I want to explain the responsibilitie
 Given all of that, we end up with the following ViewModel code:
 
 ```kotlin
-class TaskListViewModel(private val repository: TaskRepository) : ViewModel() {
-    val tasks = MutableLiveData<List<BaseTask>>()
-    val newTask = MutableLiveData<BaseTask>()
-    val navigationAction = MutableLiveData<NavigationAction>()
+    class TaskListViewModel(private val repository: TaskRepository) : ViewModel() {
+        val tasks = MutableLiveData<List<BaseTask>>()
+        val newTask = MutableLiveData<BaseTask>()
+        val navigationAction = MutableLiveData<NavigationAction>()
 
-    fun getTasks() {
-        if (tasks.value == null) {
-            tasks.value = repository.getItems()
+        fun getTasks() {
+            if (tasks.value == null) {
+                tasks.value = repository.getItems()
+            }
+        }
+
+        fun returnedFromAddTask(data: Intent?) {
+            val description = data?.getStringExtra(AddTaskActivity.DESCRIPTION_KEY).orEmpty()
+            val taskFromIntent = BaseTask(description)
+            newTask.value = taskFromIntent
+        }
+
+        fun addButtonClicked() {
+            navigationAction.value = NavigationAction.ADD_TASK
         }
     }
-
-    fun returnedFromAddTask(data: Intent?) {
-        val description = data?.getStringExtra(AddTaskActivity.DESCRIPTION_KEY).orEmpty()
-        val taskFromIntent = BaseTask(description)
-        newTask.value = taskFromIntent
-    }
-
-    fun addButtonClicked() {
-        navigationAction.value = NavigationAction.ADD_TASK
-    }
-}
 ```
 
 Again, the key thing to note here is that the ViewModel has no ties whatsoever to the view. The nice thing about this now is that multiple views could reference an instance of this viewmodel, if we needed to.
@@ -119,78 +119,78 @@ Similar to the last example, our view just refers to the activity or fragment. B
 2. Once the ViewModel is created, the view will observe the three LiveData we created and react accordingly.
 
 ```kotlin
-class TaskListActivity : BaseTaskListActivity() {
-    private val adapter = BaseTaskAdapter()
-    private lateinit var viewModel: TaskListViewModel
+    class TaskListActivity : BaseTaskListActivity() {
+        private val adapter = BaseTaskAdapter()
+        private lateinit var viewModel: TaskListViewModel
 
-    private val viewModelFactory = object : ViewModelProvider.Factory {
-        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            val repository = TaskRepository()
-            val viewModel = TaskListViewModel(repository)
+        private val viewModelFactory = object : ViewModelProvider.Factory {
+            override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+                val repository = TaskRepository()
+                val viewModel = TaskListViewModel(repository)
 
-            @Suppress("UNCHECKED_CAST")
-            return viewModel as T
-        }
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        setupViewModel()
-        initializeRecyclerView()
-        initializeFAB()
-
-        viewModel.getTasks()
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        if (requestCode == ADD_TASK_REQUEST && resultCode == Activity.RESULT_OK) {
-            viewModel.returnedFromAddTask(data)
-        }
-    }
-
-    private fun setupViewModel() {
-        viewModel = ViewModelProviders.of(this, viewModelFactory).get(TaskListViewModel::class.java)
-
-        viewModel.tasks.observe(this, Observer {
-            it?.let(adapter::tasks::set)
-        })
-
-        viewModel.newTask.observe(this, Observer {
-            it?.let { task ->
-                adapter.tasks += task
+                @Suppress("UNCHECKED_CAST")
+                return viewModel as T
             }
-        })
+        }
 
-        viewModel.navigationAction.observe(this, Observer {
-            when (it) {
-                NavigationAction.ADD_TASK -> navigateToAddTask()
+        override fun onCreate(savedInstanceState: Bundle?) {
+            super.onCreate(savedInstanceState)
+
+            setupViewModel()
+            initializeRecyclerView()
+            initializeFAB()
+
+            viewModel.getTasks()
+        }
+
+        override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+            super.onActivityResult(requestCode, resultCode, data)
+
+            if (requestCode == ADD_TASK_REQUEST && resultCode == Activity.RESULT_OK) {
+                viewModel.returnedFromAddTask(data)
             }
-        })
-    }
+        }
 
-    private fun initializeRecyclerView() {
-        taskList.adapter = adapter
-        taskList.layoutManager = LinearLayoutManager(this)
-    }
+        private fun setupViewModel() {
+            viewModel = ViewModelProviders.of(this, viewModelFactory).get(TaskListViewModel::class.java)
 
-    private fun initializeFAB() {
-        fab.setOnClickListener {
-            viewModel.addButtonClicked()
+            viewModel.tasks.observe(this, Observer {
+                it?.let(adapter::tasks::set)
+            })
+
+            viewModel.newTask.observe(this, Observer {
+                it?.let { task ->
+                    adapter.tasks += task
+                }
+            })
+
+            viewModel.navigationAction.observe(this, Observer {
+                when (it) {
+                    NavigationAction.ADD_TASK -> navigateToAddTask()
+                }
+            })
+        }
+
+        private fun initializeRecyclerView() {
+            taskList.adapter = adapter
+            taskList.layoutManager = LinearLayoutManager(this)
+        }
+
+        private fun initializeFAB() {
+            fab.setOnClickListener {
+                viewModel.addButtonClicked()
+            }
+        }
+
+        private fun navigateToAddTask() {
+            val intent = Intent(this, AddTaskActivity::class.java)
+            startActivityForResult(intent, ADD_TASK_REQUEST)
+        }
+
+        companion object {
+            private const val ADD_TASK_REQUEST = 0
         }
     }
-
-    private fun navigateToAddTask() {
-        val intent = Intent(this, AddTaskActivity::class.java)
-        startActivityForResult(intent, ADD_TASK_REQUEST)
-    }
-
-    companion object {
-        private const val ADD_TASK_REQUEST = 0
-    }
-}
 ```
 
 # More
