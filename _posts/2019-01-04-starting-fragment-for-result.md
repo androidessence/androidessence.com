@@ -84,7 +84,7 @@ I highly recommend [this answer](https://stackoverflow.com/questions/18634207/di
 
 ### Using Add
 
-If you're using an add transaction, the fragment is still visible on screen (just behind the previous one), so you're free top manipulate the view directly when handling the result:
+If you're using an add transaction, the fragment is still visible on screen (just behind the previous one), so you're free to manipulate the view directly when handling the result:
 
 ```kotlin
   fun setName(name: String) {
