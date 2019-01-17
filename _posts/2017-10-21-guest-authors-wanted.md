@@ -13,7 +13,7 @@ After two years of blogging on this site, posting various tutorials and Android 
 
 <!--more-->
 
-As of today, Android Essence is proud to announce support for [guest authors]({{site.url}}/guest-author/)! Have some content you've been dying to write about but didn't know where to write it? Know of something that would fit the Android Essence brand but has never discussed? I would be honored for you to contribute to it. The page linked in this paragraph has a thorough walk through of how you can contribute and what is expected.
+As of today, Android Essence is proud to announce support for [guest authors]({{site.url}}/guest-author)! Have some content you've been dying to write about but didn't know where to write it? Know of something that would fit the Android Essence brand but has never discussed? I would be honored for you to contribute to it. The page linked in this paragraph has a thorough walk through of how you can contribute and what is expected.
 
 This blog post will remain the official source of truth for all updates to the program, and its current status:
 
