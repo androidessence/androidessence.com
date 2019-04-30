@@ -5,8 +5,8 @@ title: Showing A Fragment For A Result
 description: An explanation on how fragments can be used similar to startActivityForResult in Android.
 modified: 2019-01-04
 published: true
-tags: [Android Essence]
-categories: [android, tutorial, fragments]
+tags: [fragments]
+categories: [android]
 ---
 
 A number of developers preach a single activity architecture on Android, which is something I've been trying to move forward to as well. In the process, though, I ran into one tricky problem. I don't have something like `startActivityResult` for fragments. If you're unfamiliar, `startActivityForResult` is a method that allows you to launch an activity with a specific request code, and when that activity finishes, your first activity will get a callback in `onActivityResult` and can do stuff with it. 

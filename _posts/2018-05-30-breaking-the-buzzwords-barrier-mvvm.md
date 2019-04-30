@@ -5,7 +5,7 @@ title: Breaking the Buzzwords Barrier Part 1&#58; MVVM
 description: Demonstrates how to architect an Android application using MVVM.
 modified: 2018-05-30
 published: true
-tags: [Android Essence]
+tags: [architecture, mvvm]
 categories: [android, tutorial]
 ---
 

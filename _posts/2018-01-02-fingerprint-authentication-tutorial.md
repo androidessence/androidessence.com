@@ -5,7 +5,7 @@ title: Fingerprint Authentication Tutorial
 description: Step by step guide to creating a fingerprint authentication flow for Android.
 modified: 2018-01-02
 published: true
-tags: [Android Essence]
+tags: [fingerprint]
 categories: [android, tutorial]
 ---
 
