@@ -5,7 +5,7 @@ title: Breaking the Buzzwords Barrier Part 3&#58; ViewModel
 description: Explains what a ViewModel means in both MVVM and Android contexts. 
 modified: 2018-06-01
 published: true
-tags: [Android Essence]
+tags: [architecture]
 categories: [android, tutorial]
 ---
 

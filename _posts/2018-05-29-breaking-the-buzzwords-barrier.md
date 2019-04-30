@@ -5,7 +5,7 @@ title: Breaking the Buzzwords Barrier
 description: Series of posts going over a few of the Android development buzzwords, and how to integrate them into your application.
 modified: 2018-05-30
 published: true
-tags: [Android Essence]
+tags: [architecture]
 categories: [android, tutorial]
 ---
 

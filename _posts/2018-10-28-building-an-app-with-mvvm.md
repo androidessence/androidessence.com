@@ -5,7 +5,7 @@ title: Building An Application With MVVM
 description: Demonstrates how to build an Android application with MVVM architecture.
 modified: 2018-10-28
 published: true
-tags: [Android Essence]
+tags: [architecture, mvvm]
 categories: [android]
 ---
 

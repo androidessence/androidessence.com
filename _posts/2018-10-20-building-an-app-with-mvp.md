@@ -5,7 +5,7 @@ title: Building An Application With MVP
 description: Demonstrates how to build an Android application with MVP architecture.
 modified: 2018-10-20
 published: true
-tags: [Android Essence]
+tags: [architecture, mvp]
 categories: [android, tutorial]
 ---
 

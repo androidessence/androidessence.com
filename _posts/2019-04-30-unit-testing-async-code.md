@@ -5,7 +5,7 @@ title: Unit Testing RxJava or Coroutine Code With Constructor Injection
 description: A walk through for unit testing asynchronous tools such as RxJava or Coroutines.
 modified: 2019-04-30
 published: true
-tags: [Android Essence]
+tags: [rxjava, coroutines, testing]
 categories: [android]
 ---
 

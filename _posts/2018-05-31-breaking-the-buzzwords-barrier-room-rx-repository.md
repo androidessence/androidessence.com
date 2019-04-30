@@ -5,7 +5,7 @@ title: Breaking the Buzzwords Barrier Part 2&#58; Rx, Room, and Repository
 description: Demonstrates how to use RxJava with Room and the Repository pattern.
 modified: 2018-05-31
 published: true
-tags: [Android Essence]
+tags: [architecture, rxjava, room, databases]
 categories: [android, tutorial]
 ---
 
