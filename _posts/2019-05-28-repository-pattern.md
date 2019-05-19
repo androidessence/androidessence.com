@@ -117,11 +117,13 @@ private val viewModelFactory = object : ViewModelProvider.Factory {
 }
 ```
 
-# An A/B Test Example
+# Multiple Implementation Example
 
-This pattern is especially important if you want to consider A/B testing. Something a developer might face is migrating from a Retrofit API to a GraphQL API using Apollo. If your code is already using the repository pattern, you don't need to worry about updating your ViewModel.
+This pattern is especially important if you want to consider multiple implementations for fetching data. A common example may be that you want to also fetch data from a local database, in addition to your network service.
 
-All we would need to do is create our `ApolloPokemonService` and then we can conditionall pass that into the ViewModel:
+Let's consider an example where we have an explicit offline mode that fetches data from a database. If your code is already using the repository pattern, we don't need to worry about updating the ViewModel.
+
+All we would need to do is create our `DatabasePokemonService` and then we can conditionally pass that into the ViewModel:
 
 ```kotlin
 private val viewModelFactory = object : ViewModelProvider.Factory {
@@ -133,13 +135,38 @@ private val viewModelFactory = object : ViewModelProvider.Factory {
 }
 
 private fun getPokemonRepository(): PokemonRepository {
-    if (inGraphQLGroup()) {
-        return ApolloPokemonService()
+    if (offlineMode()) {
+        return DatabasePokemonService()
     } else {
         return RetrofitPokemonService()
     }
 }
 ```
+
+# Testing Benefits
+
+When you move your data fetching code into an interface, you also make unit testing a lot easier! Our unit tests for the ViewModel don't have to worry about the data implementation either, we can just use Mockito to mock the interface and stub test data that way:
+
+```kotlin
+class DetailActivityViewModelTest {
+    ...
+
+    private val mockRepository = mock(PokemonRepository::class.java)
+
+    @Test
+    fun loadData() {
+        val testPokemon = Pokemon(name = "Adam", types = listOf(TypeSlot(type = Type("grass"))))
+        
+        whenever(mockRepository.getPokemonDetail(anyString())).thenReturn(testPokemon)
+
+        ...
+    }
+
+    ...
+}
+```
+
+Now we don't have to worry about creating a room database in our unit tests, or a retrofit service. Dealing with an interface can help avoid all of those struggles. 
 
 # Resources
 
