@@ -53,7 +53,7 @@ If you've ever found yourself in this spot, even if you haven't yet hit this lim
 
 Going back up to the TL;DR, your ViewModel shouldn't care where the information comes from. In many programming problems where we don't care about the implementation of something, we can put the contract of what we do care about in an interface.
 
-We can start there by defining our interface for what our data fetching contract should have:
+We can start there by defining our interface for what our data fetching behavior should be:
 
 ```kotlin
 interface PokemonRepository {
@@ -108,12 +108,41 @@ Now, we can just update our call site for creating the ViewModel to use this imp
 
 ```kotlin
 private val viewModelFactory = object : ViewModelProvider.Factory {
-        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            val pokemonAPI = ...
-            val repository = PokemonRetrofitService(pokemonAPI)
+    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+        val pokemonAPI = ...
+        val repository = PokemonRetrofitService(pokemonAPI)
 
-            return DetailActivityViewModel(repository) as T
-        }
+        return DetailActivityViewModel(repository) as T
     }
+}
 ```
 
+# An A/B Test Example
+
+This pattern is especially important if you want to consider A/B testing. Something a developer might face is migrating from a Retrofit API to a GraphQL API using Apollo. If your code is already using the repository pattern, you don't need to worry about updating your ViewModel.
+
+All we would need to do is create our `ApolloPokemonService` and then we can conditionall pass that into the ViewModel:
+
+```kotlin
+private val viewModelFactory = object : ViewModelProvider.Factory {
+    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+        val repository = getPokemonRepository()
+
+        return DetailActivityViewModel(repository) as T
+    }
+}
+
+private fun getPokemonRepository(): PokemonRepository {
+    if (inGraphQLGroup()) {
+        return ApolloPokemonService()
+    } else {
+        return RetrofitPokemonService()
+    }
+}
+```
+
+# Resources
+
+I hope you found this helpful in understanding how to properly organize your data fetching code. If you want to see the repository pattern in action (although I don't do this A/B testing scenario), you should check out this [Pokedex project](https://github.com/AdamMc331/PokeDex) on GitHub. 
+
+If you like analyzing the code directly, you can see the repository pattern implemented in [this pull request](https://github.com/AdamMc331/PokeDex/pull/20).
