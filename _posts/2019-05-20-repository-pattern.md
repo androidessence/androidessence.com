@@ -3,7 +3,7 @@ layout: post
 author: adam
 title: Repository Pattern: Properly Organizing Your Data Layer
 description: An explanation of the repository pattern and why we need it.
-modified: 2019-05-28
+modified: 2019-05-20
 published: true
 tags: [architecture]
 categories: [android]
