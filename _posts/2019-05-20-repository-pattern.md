@@ -11,7 +11,7 @@ categories: [android]
 
 How to properly architect your application is a concern we as developers constantly face. There's unfortunately no one size fits all answer to it, and sometimes we don't even know where to begin. I've learned along my Android journey that the answer can also vary depending on what portion of your app you're trying to organize. Of course, you might say, [it depends](https://handstandsam.com/2019/03/10/it-depends-is-the-answer-to-your-android-question/).
 
-When it comes to your data layer, though, there are some really good tips and how to write clean, maintainable code. One of them is the Repository Pattern, and I'd like to provide a quick walk through of what it is and why it's important. 
+When it comes to your data layer, though, there are some really good tips on how to write clean, maintainable code. One of them is the Repository Pattern, and I'd like to provide a quick walk through of what it is and why it's important. 
 
 <!--more-->
 
