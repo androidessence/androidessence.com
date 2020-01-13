@@ -6,16 +6,12 @@ share: true
 
 # About Android Essence
 
-Android Essence is an Android developers blog full of various tutorials and discussions. It started as a user interface (UI) focussed blog, but has expanded into general Android development.
+Android Essence was first launched on September 2, 2015 by [Adam McNeilly](https://adammcneilly.com). It started off with Adam just wanting to share everything he'd learned about Android development with the community. You can find all sorts of historical context from these posts, like understanding a RecyclerView vs ListView, or even working with a navigation drawer (what a throwback). The problem is that there wasn't always a rhyme or reason to the posts.
 
-## History
+Today, Android Essence's purpose is to break down Android development in ways that everyone can learn from, regardless of skill level. Programming can be complicated, but it doesn't always need to be. When we skip past the buzzwords and over engineering of topics, and keep our focus on the core fundamentals of programming, we can accomplish great things.
 
-Android Essence was first launched on September 2, 2015 by, [Adam McNeilly](http://adammcneilly.com). As the content and reach of the blog grew, Adam decided to open up the blog to [guest authors]({{site.url}}/guest-author) in October, 2017.
+No matter what task you're trying to solve, or how complicated it may seem, Android Essence is your place to figure it out. 
 
-## Contribute
+## Requesting Content
 
-Want to write for us? Check out the [official blog post]({{ site.baseurl }}{% link _posts/2017-10-21-guest-authors-wanted.md %}) welcome guest authors to the site!
-
-## Requests
-
-Not a writer, but have something you're interested in learning about? Drop an issue on our [GitHub](https://github.com/androidessence/androidessence.com/issues) repository and someone will pick it up. 
+If there's a topic you've had difficulty learning and didn't find what you were looking for, please create an issue on [GitHub](https://github.com/androidessence/androidessence.com/issues). 
