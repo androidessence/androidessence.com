@@ -1,5 +1,5 @@
 title: Android Essence
-description: Crafting Android User Interfaces
+description: Simplified Android Development
 
 disqus_shortname: androidessence
 reading_time: false # if true, shows the estimated reading time for a post
@@ -20,10 +20,10 @@ url: https://androidessence.com
 menu:
   - title: 'Home'
     url: '/'
-  - title: 'Tags'
-    url: '/tags'
-  - title: 'Write For Us'
-    url: '/guest-author'
+  - title: 'About'
+    url: '/about'
+  # - title: 'Write For Us'
+  #   url: '/guest-author'
   # - title: 'Categories'
   #   url: '/categories'
   #   type: 'categories'
@@ -82,4 +82,4 @@ titlecase: true
 
 include: [".htaccess"]
 exclude: ["demo/*", "lib", "config.rb", "Capfile", "config", "Gemfile", "Gemfile.lock", "README.md", "LICENSE", "log", "Rakefile", "Rakefile.rb", "tmp", "less", "*.sublime-project", "*.sublime-workspace", "test", "spec", "Gruntfile.js", "package.json", "node_modules"]
-gems: [jekyll-paginate]
+plugins: [jekyll-paginate]
