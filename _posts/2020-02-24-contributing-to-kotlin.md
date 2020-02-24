@@ -37,7 +37,7 @@ Now that we've decided on the contribution we're going to make, we need to get o
 
 # Finding Samples To Write
 
-Unfortunately, there's no easy well to tell which parts of the standard library have samples or not. It's a little bit of trial and error clicking through the documentation. 
+Unfortunately, there's no easy way to tell which parts of the standard library have samples or not. It's a little bit of trial and error clicking through the documentation. 
 
 If a function does have samples, you'll see them as code blocks beneath the method: 
 
