@@ -8,7 +8,7 @@ tags: [open source]
 categories: [android]
 ---
 
-The Kotlin language used by Android developers all of the world is open source and available on [GitHub](https://github.com/jetbrains/kotlin). This means it's open for contributions from anyone! It may, of course, feel very intimidating to contribute to a project of that size. Especially for those of us who are new to open source contributions. 
+The Kotlin language used by Android developers all over the world is open source and available on [GitHub](https://github.com/jetbrains/kotlin). This means it's open for contributions from anyone! It may, of course, feel very intimidating to contribute to a project of that size. Especially for those of us who are new to open source contributions. 
 
 The JetBrains team makes this process a lot less scary than it sounds. There are some beginner friendly ways to contribute to the language, and this post will walk you through every step.
 
@@ -118,8 +118,6 @@ public inline fun <T> vetoable(...): ReadWriteProperty<Any?, T>
 ```
 
 If you want to see the full source for vetoable, you can find it on [GitHub](https://github.com/JetBrains/kotlin/blob/master/libraries/stdlib/src/kotlin/properties/Delegates.kt#L37-L55).
-
-You can also look at the pull request for that change [here](https://github.com/JetBrains/kotlin/pull/1426).
 
 # FilterNotNull Sample
 
