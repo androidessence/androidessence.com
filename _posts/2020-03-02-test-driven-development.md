@@ -1,7 +1,7 @@
 ---
 layout: post
 author: adam
-title: Beginners Guide To Test Driven Development
+title: Getting Started With Test Driven Development
 modified: 2020-03-02
 published: true
 tags: [testing]
