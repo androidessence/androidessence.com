@@ -2,7 +2,7 @@
 name: Content Request Template
 about: Readers can request content they want to see on the site.
 title: 'Content Request:'
-labels: ''
+labels: content request
 assignees: AdamMc331
 
 ---
