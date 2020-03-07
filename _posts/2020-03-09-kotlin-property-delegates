@@ -1,0 +1,45 @@
+---
+layout: post
+author: adam
+title: TBD Kotlin Property Delegates
+modified: 2020-03-09
+published: true
+tags: [kotlin]
+categories: [android]
+---
+
+Some introduction about Kotlin property delegates, around what they can do and why they exist.
+
+<!--more-->
+
+# Existing Delegates
+
+The Kotlin language has a few delegates that exist already for us to use. 
+
+## Vetoable
+
+This allows us to veto new values.
+
+## Observable
+
+This allows us to observe new values.
+
+## notNull
+
+This allows us to ensure new values are not null.
+
+# Creating Your Own Delegates
+
+We can create our own property delegates if we'd like, to cover specific use cases.
+
+## SharedPrefsDelegate
+
+Show how we can store something in SharedPrefs when we read/write. 
+
+## Some Other Delegate?
+
+Try to come up with another unique delegate, like maybe an `ObservableField` type of thing? 
+
+## Recap
+
+Tell 'em what you told 'em, link 'em to resources.
