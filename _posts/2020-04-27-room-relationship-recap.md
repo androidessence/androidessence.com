@@ -100,14 +100,14 @@ It's really great that we can get a one line solution to this problem with embed
 | Adam        | 111          | Wall Street |
 | John        | 111          | Wall Street |
 
-If I go into the database, it's possible that I only update one of the rows, causing the students to have different addresses:
+If we go into the database, it's possible that we only update one of the rows, causing the students to have different addresses:
 
 | studentName | streetNumber | streetName  |
 |-------------|--------------|-------------|
 | Adam        | 111          | Wall Street |
 | John        | 112          | Wall Street |
 
-Looking at the database, I have no idea which one is right. This problem is something called an update anomaly. Now, if you aren't concerned about sharing information between rows, and you are just looking for a way to better structure your Room entities, then embedded properties are the perfect solution. 
+Looking at the database, we have no idea which one is right. This problem is something called an update anomaly. Now, if you aren't concerned about sharing information between rows, and you are just looking for a way to better structure your Room entities, then embedded properties are the perfect solution. 
 
 If you need stronger data integrity, we need to move this information into a different entity, and create a link between the two. This connection between two entities is called an [entity relationship](https://en.wikipedia.org/wiki/Entity%E2%80%93relationship_model). We're going to look at three types of relationships in this post. 
 
@@ -217,6 +217,144 @@ It's rare that you'll ever dive into the generated code from a library like Room
 
 1. First, we run the SQL query specified in our `@Query()` annotation, which in this example is to request all students. Seen on [line 30](https://gist.github.com/AdamMc331/311f1b84045af382132c8fa145be81cf#file-universitydao_impl-java-L30).
 2. Next, we get the index of all the relevant Student columns, thanks to the `@Embedded` annotation in our response object. Seen on [lines 39 to 43](https://gist.github.com/AdamMc331/311f1b84045af382132c8fa145be81cf#file-universitydao_impl-java-L39-L43).
-3. Once we've requested all of the students, we request all vehicles that belong to one of those students. This is the second database query that's run. Seen on [line 132](https://gist.github.com/AdamMc331/311f1b84045af382132c8fa145be81cf#file-universitydao_impl-java-L132).
+3. Once we've requested all of the students, we request all vehicles that belong to one of those students. Room knows how to relate the two tables thanks to our `@Relation` annotation. This is the second database query that's run, and also why we needed the `@Transaction` annotation. Seen on [line 132](https://gist.github.com/AdamMc331/311f1b84045af382132c8fa145be81cf#file-universitydao_impl-java-L132).
 4. After running these queries, the Room library will then take the responses and map everything into the neat data class that we've defined and return a list of them. 
 
+# One-To-One Relationships
+
+Having looked at one type of database relationship, we'll notice that the syntax to create, enforce, and query the next two types of relationships will be quite similar. 
+
+A one-to-one relationship is when you have exactly one instance of a parent and a child entity. An example would be a `Student`, and their university `Application`, if they can only apply once. 
+
+This may seem counter intuitive at first, and it's reasonable to wonder why you wouldn't just put all of the information in one table. There's a couple reasons we might do that:
+
+1. Data size concerns. Let's say we want to request information about all of the students, but we don't need to care about their applications. Separating the data into two entities allows us to request only the data we actually need. 
+2. Security. This may not be common in Android applications, but in other database systems you may want some information to be in a separate database that has different permissions, but still keep a one-to-one relationship with information in another database. 
+
+## Creating One-To-One Relationships
+
+This type of relationship is hard to enforce perfectly. We can't create a link between two entities directly because we don't have a way to insert into two tables at the exact same time. We can get close, though, by limiting the number of `Application` that can relate to a student. 
+
+If we add a unique index on our `Application` entity, we can enforce that any given `studentId` only appears _once_ inside the applicaiton table:
+
+```kotlin
+@Entity(
+    foreignKeys = [
+        ForeignKey(
+            entity = Student::class,
+            parentColumns = ["studentId"],
+            childColumns = ["studentId"]
+        )
+    ],
+    indices = [Index(value = ["studentId"], unique = true)]
+)
+data class Application(
+    @PrimaryKey(autoGenerate = true)
+    val applicationId: Long = 0L,
+    val studentId: Long = 0L,
+    val applicationText: String = ""
+)
+```
+
+There is still potential for this to be a one-to-zero relationship, if you insert a student but never a corresponding application, so keep that in mind as you develop your applications. 
+
+## Querying One-To-One Relationships
+
+The query code for this will look very similar to the last example! There is only one difference:
+
+1. The response object references a single `Application` record, and not a list like it did in the last example. 
+
+Here is the code:
+
+```
+// StudentWithApplication.kt
+data class StudentWithApplication(
+    @Embedded
+    val student: Student,
+    @Relation(
+        parentColumn = "studentId",
+        entityColumn = "studentId"
+    )
+    val application: Application
+)
+
+// UniversityDAO.kt
+@Query("SELECT * FROM Student")
+@Transaction
+fun fetchStudentsWithApplication(): LiveData<List<StudentWithApplication>>
+```
+
+We still need the `@Transaction` annotation because a second query is run behind the scenes. If we dive into the generated code for this method, as well, we can understand potential corner cases that we'll encounter here:
+
+1. If there is no application associated with a student, this query will return null and potentially crash. The solution is to make `application` property nullable inside `StudentWithApplication`. 
+2. If there is only one application associated with a student, this will return as expected.
+3. If there happens to be more than one application per student (which won't be possible in our example), then Room will return the last `application` that it finds. 
+
+# Many-To-Many Relationships
+
+The last relationship type to discuss is a many-to-many relationship. This is when you have many instances of a parent entity, and many instances of a child entity. An example would be students and classes. A student can take more than one class, and a class can have more than one student. 
+
+To create this entity, we need something called a joining table. We can't link students and classes directly, we have to go through a third table that defines the relationships between them. We can do that with a third entity called `ClassEnrollments`. Here is what that relationship will look like:
+
+![Android Essence](assets/rrr/class_enrollments.png)
+
+## Creating Many-To-Many Relationships
+
+Let's look at the entity code required for `ClassEnrollments`. We need to do the following things:
+
+1. Create a ForeignKey relationship between this and `Student`.
+2. Create a ForeignKey relationship between this and `Class`.
+3. Create a composite primary key between (studentId, classId) so that we can ensure a student isn't taking a class twice.
+
+Here is the resulting entity:
+
+```kotlin
+@Entity(
+    primaryKeys = ["studentId", "classId"],
+    foreignKeys = [
+        ForeignKey(
+            entity = Student::class,
+            parentColumns = ["studentId"],
+            childColumns = ["studentId"]
+        ),
+        ForeignKey(
+            entity = Class::class,
+            parentColumns = ["classId"],
+            childColumns = ["classId"]
+        )
+    ]
+)
+data class ClassEnrollments(
+    val studentId: Long,
+    val classId: Long
+)
+```
+
+## Querying Many-To-Many Relationships
+
+You guessed it, the query code here is once again almost identical to the previous example. The only new addition for requesting a many-to-many response is to specify the joining table using the `associateBy` property inside the `@Relation` annotation:
+
+```kotlin
+data class StudentWithClasses(
+    @Embedded
+    val student: Student,
+    @Relation(
+        parentColumn = "studentId",
+        entityColumn = "classId",
+        associateBy = Junction(value = ClassEnrollments::class)
+    )
+    val classes: List<Class>
+)
+```
+
+The query itself remains consistent with what we've already done:
+
+```kotlin
+@Query("SELECT * FROM Student")
+@Transaction
+fun fetchStudentsWithClasses(): LiveData<List<StudentWithClasses>>
+```
+
+# Recap
+
+Now you have everything in your toolbox to understand how to structure complex data within a SQLite databsae using room. We know the use cases for each time of relationship, how to enforce them at a database level, and how to query each one. If you have any questions, or want to learn more about the Room library, please let me know in the comments below! You can also reach out to me on [Twitter](https://twitter.com/AdamMc331).
