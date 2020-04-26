@@ -62,11 +62,11 @@ Room will not be able to convert this to a SQLite table, because Address is not 
 
 ![Android Essence](assets/rrr/student_table_with_address.png)
 
-This is the baseline for the rest of this post. While SQLite can't store complex data in a single table, our applications still need to store information about students such as addresses, and the class they're taking. The solution to storing this data can vary, so let's explore each of the options we have. 
+This is the baseline for the rest of this post. While SQLite can't store complex data in a single table, our applications still need to store information about students such as addresses, and the classes they're taking. The solution to storing this data can vary, so let's explore each of the options we have. 
 
 # Embedded Properties
 
-The previous example of storing a Student with their Address actually has a quick, one line solution, which is the [@Embedded](https://developer.android.com/reference/androidx/room/Embedded) annotation. This will tell the Room library to take each field from the `@Embedded` property, and map it to a column inside the entity we're creating. We can demonstrate this clearly by also specifying a `prefix` for the embedded columns. 
+The previous example of storing a Student with their Address actually has a quick, one line, solution, which is the [@Embedded](https://developer.android.com/reference/androidx/room/Embedded) annotation. This will tell the Room library to take each field from the `@Embedded` property, and map it to a column inside the entity we're creating. We can demonstrate this clearly by also specifying a `prefix` for the embedded columns. 
 
 This means we can take this code:
 
