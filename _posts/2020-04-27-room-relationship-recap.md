@@ -8,9 +8,9 @@ tags: [databases]
 categories: [android]
 ---
 
-In this post, we're going to explore some advanced concepts of the [Room Persistance Library](https://developer.android.com/training/data-storage/room). Room is a great tool for storing complex data for your Android applications inside a SQLite database. As you begin to store more data in your applications, though, it can be difficult to determine how to organize all of it. 
+In this post, we're going to explore some advanced concepts of the [Room Persistence Library](https://developer.android.com/training/data-storage/room). Room is a great tool for storing complex data for your Android applications inside a SQLite database. As you begin to store more data in your applications though, it can be difficult to determine how to organize all of it. 
 
-We're going to demistify this, and break down everything you need to know about database relationships in the Room library. 
+We're going to demistify database organization, and break down everything you need to know about database relationships in the Room library. 
 
 <!--more-->
 
@@ -24,7 +24,7 @@ This blog post is adapted from a YouTube video I made for [AsyncAndroid](https:/
 
 # The Problem
 
-To start, let's look at a very common limitation we will encounter when working with a sqlite database. Here is a basic Room entity with three fields:
+To start, let's look at a very common limitation we will encounter when working with a SQLite database. Here is a basic Room entity with three fields:
 
 ```kotlin
 @Entity
@@ -357,4 +357,6 @@ fun fetchStudentsWithClasses(): LiveData<List<StudentWithClasses>>
 
 # Recap
 
-Now you have everything in your toolbox to understand how to structure complex data within a SQLite databsae using room. We know the use cases for each time of relationship, how to enforce them at a database level, and how to query each one. If you have any questions, or want to learn more about the Room library, please let me know in the comments below! You can also reach out to me on [Twitter](https://twitter.com/AdamMc331).
+Now you have everything in your toolbox to understand how to structure complex data within a SQLite database using room. We know the use cases for each time of relationship, how to enforce them at a database level, and how to query each one. If you have any questions, or want to learn more about the Room library, please let me know in the comments below! You can also reach out to me on [Twitter](https://twitter.com/AdamMc331).
+
+If you'd like to learn more about database organization as a concept, you can read my series on Effective Database Design at [dev.to](https://dev.to/adammc331/how-to-properly-design-a-database-part-1-2h6f).
