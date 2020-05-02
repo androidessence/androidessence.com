@@ -163,6 +163,104 @@ fun createDatabase(appContext: Context): StudentDatabase {
 
 This approach could make development smoother, while still ensuring that you handle migrations when upgrading the database, which is the flow your users are likely to encounter. 
 
-# The Long Way
+# The Data Focused Way
 
-If you want to preserve your applications data while updating to a new schema, it requires a little more work. This doesn't have to be scary, though - we're going to break down the entire process and help create good practices for creating and supporting migrations for your applications database. 
+If you want to preserve your applications data while updating to a new schema, it requires a little more work. We're going to break down that process and help create a tool set for having the confidence to write and create migrations that are maintainable for developers, and keep your users happy without losing their on-device data.
+
+## Project Set Up
+
+Before creating the database migrations, there's some recommended project configurations. We need to do three things:
+
+1. Update our build.gradle file to export the database schema as a JSON file. This will be used when we want to test our database migrations, as it will tell the Room library what the scema for the database is at a specific version. 
+2. We need to modify our build.gradle file to make those schemas part of the source sets for the androidTest package, so that our database tests will be able to reference them. 
+3. We need to add a dependency to the room-testing artifact to get access to classes that help us test database migrations. 
+
+Here is what our app module's build.gradle file looks like after that, trimming it down to those three bullets:
+
+```groovy
+android {
+    defaultConfig {
+        javaCompileOptions {
+            annotationProcessorOptions {
+                // Will export the schema to this directory during the "build" command.
+                arguments = ["room.schemaLocation": "$projectDir/schemas".toString()]
+            }
+        }
+    }
+    
+    // Tells our androidTest project where to find the schema
+    sourceSets {
+        androidTest.assets.srcDirs += files("$projectDir/schemas".toString())
+    }
+}
+
+dependencies {
+    // Brings in helpers for testing these migrations
+    androidTestImplementation "androidx.room:room-testing:$room_version"
+}
+```
+
+If we build our project after this, we'll notice a new class inside `$projectDir/schemas` called `1.json`, or whatever your current database version is. Here is a [sample](https://github.com/AdamMc331/mastering-room-migrations/blob/master/app/schemas/com.adammcneilly.masteringroommigrations.StudentDatabase/1.json) of what that looks like, but we'll revisit the importance of this file shortly. 
+
+## Making The Change
+
+Once we have done this project setup, and we've exported the json schema of our current database version, we can go ahead and change our database. Let's make the same change as earlier - add a new field on `Student` called `age` and update our database version to 2. If we rebuild now, we'll see a new file for `2.json` in the schema directory.
+
+It's important to make sure we exported the original before making this change - having a file for each database version is what Room is going to use when we write tests for this, discussed in a later section. 
+
+## Create The Migration
+
+In order to support the migration from one version to another, we need to create our own implementation of the [Migration](https://developer.android.com/reference/kotlin/androidx/room/migration/Migration) abstract class:
+
+```
+/**
+ * When Migrating from version 1 to version 2, we added the age property on the student
+ * entity.
+ */
+val MIGRATION_1_2 = object : Migration(1, 2) {
+    override fun migrate(database: SupportSQLiteDatabase) {
+        // ...
+    }
+}
+```
+
+Here are tips for creating these properties:
+
+1. A common naming convention found in the Room documentation is `MIGRATION_$startVersion_$endVersion`. You can use whatever you are comfortable with, though.
+2. The parent constructor takes an argument for the starting and ending version of the migration. Here, we're migrating from version 1 to version 2. 
+3. Since `Migration` is an abstract class, we  need to override the one method called `migrate`, which gives us a reference to the database we're migrating. 
+4. I recommend documenting your migrations with the changes that are relevant to it. This will help you and your team when reviewing these in the future. 
+
+Inside of the `migrate` method, we have to write the actual SQL code for handling the migration. The code you put here will vary depending on what's changed - adding a field, removing a field, adding a new table, and more cases. At the end of this post you'll find some resources to help you with determining what the required statements are. 
+
+For this particular change, we need to alter the `Student` table by adding a new column:
+
+```kotlin
+val MIGRATION_1_2 = object : Migration(1, 2) {
+    override fun migrate(database: SupportSQLiteDatabase) {
+        database.execSQL("ALTER TABLE Student ADD COLUMN age INTEGER NOT NULL DEFAULT 0")
+    }
+}
+```
+
+Since `age` is non-null in the database, we need to supply a default which is going to be applied to all of the existing rows. If the new field were nullable, we could omit the `DEFAULT` property, if we wanted to.
+
+## Add Migration To Database Builder
+
+Now that we've defined the expected behavior for migrating from version 1 to version 2, we need to add this migration to our database builder, so that when we attempt to create a database for a phone that has our old application version, Room will know how to support this user:
+
+```kotlin
+fun createDatabase(appContext: Context): StudentDatabase {
+    return Room.databaseBuilder(
+        appContext,
+        StudentDatabase::class.java,
+        "student-database.db"
+    )
+        .addMigrations(MIGRATION_1_2)
+        .allowMainThreadQueries()
+        .build()
+}
+```
+
+We're now safe to run our app without experiencing any of the crashes from the beginning of this post! 
+
