@@ -144,7 +144,7 @@ fun createDatabase(appContext: Context): StudentDatabase {
 }
 ```
 
-# Downgrade Destructive Migrations
+## Downgrade Destructive Migrations
 
 It's possible that a database version is being downgraded. We may see this happen often in development, if developer "A" is working on a new database change, but developer "B" is not. Switching between these branches will cause a migration error like we saw earlier. We could resolve this case by only allowing destructive migrations if we notice the database version is being downgraded:
 
@@ -162,3 +162,7 @@ fun createDatabase(appContext: Context): StudentDatabase {
 ```
 
 This approach could make development smoother, while still ensuring that you handle migrations when upgrading the database, which is the flow your users are likely to encounter. 
+
+# The Long Way
+
+If you want to preserve your applications data while updating to a new schema, it requires a little more work. This doesn't have to be scary, though - we're going to break down the entire process and help create good practices for creating and supporting migrations for your applications database. 
