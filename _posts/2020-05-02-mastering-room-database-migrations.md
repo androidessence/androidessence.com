@@ -100,7 +100,7 @@ abstract class StudentDatabase : RoomDatabase() {
 
 Unfortunately, the app will crash again with this new error:
 
-````
+```
 Caused by: java.lang.IllegalStateException: A migration from 1 to 2 was required but not found. Please provide the necessary Migration path via RoomDatabase.Builder.addMigration(Migration ...) or allow for destructive migrations via one of the RoomDatabase.Builder.fallbackToDestructiveMigration* methods.
 ```
 
