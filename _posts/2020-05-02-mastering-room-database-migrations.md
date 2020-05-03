@@ -212,7 +212,7 @@ It's important to make sure we exported the original before making this change -
 
 In order to support the migration from one version to another, we need to create our own implementation of the [Migration](https://developer.android.com/reference/kotlin/androidx/room/migration/Migration) abstract class:
 
-```
+```kotlin
 /**
  * When Migrating from version 1 to version 2, we added the age property on the student
  * entity.
@@ -264,3 +264,129 @@ fun createDatabase(appContext: Context): StudentDatabase {
 
 We're now safe to run our app without experiencing any of the crashes from the beginning of this post! 
 
+## Testing Migrations
+
+Sometimes it may feel like manually testing your application is easier than writing your own unit tests. When it comes to database migrations, though, the opposite is often true. It is very time consuming to install a version of your app with the old database version, compile your app with the new database, and install on device to make sure everything worked. Especially if it doesn't - we have to start that whole process over again. 
+
+So let's review how we can write our own tests to validate these migrations. First, we can create a test class inside our `androidTest` directory. This class needs two things before we can write tests:
+
+1. A reference to a SupportSQLiteDatabase, which we'll create for each test.
+2. A JUnit rule for a [MigrationTestHelper](https://developer.android.com/reference/androidx/room/testing/MigrationTestHelper) from the Room library. 
+
+Here is our initial code:
+
+```kotlin
+@RunWith(AndroidJUnit4::class)
+class StudentDatabaseMigrationsTest {
+
+    private lateinit var database: SupportSQLiteDatabase
+
+    @JvmField
+    @Rule
+    val migrationTestHelper = MigrationTestHelper(
+        InstrumentationRegistry.getInstrumentation(),
+        StudentDatabase::class.java.canonicalName,
+        FrameworkSQLiteOpenHelperFactory()
+    )
+}
+```
+
+Once we have that, we can begin to test a migration. We'll look at testing the migration from version 1 to version 2 in a step-by-step manner. 
+
+### Step 1: Create A Database At The Starting Version
+
+We want to test migration from version 1 to 2. The first thing we should do is create a database that's using version 1 of our schema, and insert some test data that we want to work with. Note that we have to insert this test data manually, and cannot use the Room DAO interfaces, as those are expecting the latest database schema. 
+
+```kotlin
+@Test
+fun migrate1to2() {
+    database = migrationTestHelper.createDatabase("test-database", 1).apply {
+        // Since we've created a database with version 1, we need to insert stuff manually, because
+        // the  Room DAO interfaces are expecting the latest schema.
+
+        // Version 1 of the database has id, firstName, and lastName.
+        execSQL(
+            """
+            INSERT INTO Student VALUES (1, 'Adam',  'McNeilly') 
+            """.trimIndent()
+        )
+
+        close()
+    }
+}
+```
+
+### Step 2: Migrate To End Version
+
+Next, we need to have the database migrate from version 1 to 2, and validate the new schema. We also supply the migrations that should be run, in this case just `MIGRATION_1_2`. 
+
+```kotlin
+@Test
+fun migrate1to2() {
+    database = migrationTestHelper.createDatabase("test-database", 1).apply {
+        // ...
+    }
+
+    database = migrationTestHelper.runMigrationsAndValidate("test-database", 2, true, MIGRATION_1_2)
+}
+```
+
+At this point, if Room was unable to find a valid migration path, your test will fail. This is a good sanity check, but I think we can take this test a little further and be more thorough. 
+
+### Step 3: Validate Data
+
+Beyond validating the schema changes, we can also query the data from the database to ensure the data is what we expect. Earlier in the test, we inserted a dummy row with an id, first name, and last name. Let's manually query our new database and make sure we have all the same data, as well as a default age of 0 - which is the default we defined in our migration. 
+
+```kotlin
+@Test
+fun migrate1to2() {
+    database = migrationTestHelper.createDatabase(TEST_DB, 1).apply {
+        /....
+    }
+
+    database = migrationTestHelper.runMigrationsAndValidate(TEST_DB, 2, true, MIGRATION_1_2)
+
+    val resultCursor = database.query("SELECT * FROM Student")
+
+    assertTrue(resultCursor.moveToFirst())
+    
+    val ageColumnIndex = resultCursor.getColumnIndex("age")
+    val nameColumnIndex = resultCursor.getColumnIndex("firstName")
+    val lastNameColumnIndex = resultCursor.getColumnIndex("lastName")
+
+    val ageFromDatabase = resultCursor.getInt(ageColumnIndex)
+    val firstNameFromDatabase = resultCursor.getString(nameColumnIndex)
+    val lastNameFromDatabase = resultCursor.getString(lastNameColumnIndex)
+
+    assertEquals(0, ageFromDatabase)
+    assertEquals("Adam", firstNameFromDatabase)
+    assertEquals("McNeilly", lastNameFromDatabase)
+}
+```
+
+### Step 4: Ship With Confidence
+
+Now that you've written a database migration, and written a unit test that validates an application can update this schema and support the same data after this upgrade, you are able to ship your new app version with confidence. As you add more migrations, you can continue this approach to validate migrating from version 2 to 3, or versions 1 to 3, or whatever combination you find most important. 
+
+# Common SQL Statements For Migrations
+
+Understanding the process of creating and testing database migrations is the fundamental building block that is consistent no matter what changes are being made to your database. The only time the details about the change matters is when you are writing the migration itself:
+
+```kotlin
+val MIGRATION_1_2 = object : Migration(1, 2) {
+    override fun migrate(database: SupportSQLiteDatabase) {
+        // What SQL statement really goes here?
+        database.execSQL("")
+    }
+}
+```
+
+Room does a great job of abstracting away most of the SQL statements required for database interraction. As a result, it's easy to forget the SQL required for the migration statements. That's why I've built [this cheat sheet](https://github.com/AdamMc331/mastering-room-migrations/blob/master/migration_cheatsheet.md) alongside a sample project with database migrations to help you understand what to do, depending on the change you're making. 
+
+# Recap
+
+Database migrations can be intimidating due to the number of steps required to create, implement, and test them. Not to mention the use of manual SQL statements that Room historically helps us avoid. I hope this post was helpful in breaking down those steps, and providing you with the confidence to ship your own migrations. 
+
+Being able to save device data after making changes to the database schema is a really great user experience. Users don't want to feel like they're starting over every time they update your application. 
+
+If you have any questions, let me know in the comments! If you find a particularly unique database migration, let me know how to help, and feel free to submit PRs to the public cheat sheet above.
