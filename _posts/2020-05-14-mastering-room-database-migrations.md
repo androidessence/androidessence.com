@@ -2,7 +2,7 @@
 layout: post
 author: adam
 title: Mastering Room Database Migrations
-modified: 2020-05-02
+modified: 2020-05-14
 published: true
 tags: [databases]
 categories: [android]
@@ -381,7 +381,7 @@ val MIGRATION_1_2 = object : Migration(1, 2) {
 }
 ```
 
-Room does a great job of abstracting away most of the SQL statements required for database interraction. As a result, it's easy to forget the SQL required for the migration statements. That's why I've built [this cheat sheet](https://github.com/AdamMc331/mastering-room-migrations/blob/master/migration_cheatsheet.md) alongside a sample project with database migrations to help you understand what to do, depending on the change you're making. 
+Room does a great job of abstracting away most of the SQL statements required for database interraction. As a result, it's easy to forget the SQL required for the migration statements. That's why I've built [this cheat sheet](https://github.com/AdamMc331/mastering-room-migrations/blob/master/README.md) alongside a sample project with database migrations to help you understand what to do, depending on the change you're making. 
 
 # Recap
 
