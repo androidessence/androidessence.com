@@ -12,6 +12,12 @@ In the last post, we demonstrated the different types of [database relationships
 
 <!--more-->
 
+---
+
+This post is adapted from a YouTube video I made for [AsyncAndroid](https://twitter.com/asyncandroid).
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/tUGUNU6DPtk" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 # Starting Point
 
 Since we're exploring a niched topic within Room databases, I recommend at least reviewing the [getting started](https://developer.android.com/training/data-storage/room) documentation for Room. You don't need to be an expert, but understanding the initial annotations is important. 
