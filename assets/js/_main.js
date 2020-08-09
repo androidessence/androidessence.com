@@ -1,14 +1,14 @@
 /*! Plugin options and other jQuery stuff */
 
 // dl-menu options
-$(function() {
-  $( '#dl-menu' ).dlmenu({
-    animationClasses : { classin : 'dl-animate-in', classout : 'dl-animate-out' }
+$(function () {
+  $('#dl-menu').dlmenu({
+    animationClasses: { classin: 'dl-animate-in', classout: 'dl-animate-out' }
   });
 });
 
 // FitVids options
-$(function() {
+$(function () {
   $("article").fitVids();
 });
 
@@ -18,25 +18,25 @@ $(".close-menu").click(function () {
 });
 
 $(".about").click(function () {
-  $("#about").css('display','block');
+  $("#about").css('display', 'block');
 });
 
 $(".close-about").click(function () {
-  $("#about").css('display','');
+  $("#about").css('display', '');
 });
 
 // Add lightbox class to all image links
 $("a[href$='.jpg'],a[href$='.jpeg'],a[href$='.JPG'],a[href$='.png'],a[href$='.gif']").addClass("image-popup");
 
 // Magnific-Popup options
-$(document).ready(function() {
+$(document).ready(function () {
   $('.image-popup').magnificPopup({
     type: 'image',
     tLoading: 'Loading image #%curr%...',
     gallery: {
       enabled: true,
       navigateByImgClick: true,
-      preload: [0,1] // Will preload 0 - before current, and 1 after the current image
+      preload: [0, 1] // Will preload 0 - before current, and 1 after the current image
     },
     image: {
       tError: '<a href="%url%">Image #%curr%</a> could not be loaded.',
@@ -62,7 +62,7 @@ $(document).ready(function() {
 // });
 
 //mobile menu
-$(document).ready(function(){
+$(document).ready(function () {
   $("#menu").attr('style', '');
   $("#menu").mmenu({
     "extensions": [
@@ -87,11 +87,11 @@ $(document).ready(function(){
   });
 });
 
-var sharing = function(){
-    $(document).ready(function(){
-      $("body").floatingSocialShare({
-        buttons: ["facebook","twitter","google-plus", "linkedin", "pinterest"],
-        text: "Share with "
-      });
+var sharing = function () {
+  $(document).ready(function () {
+    $("body").floatingSocialShare({
+      buttons: ["facebook", "twitter", "linkedin", "pinterest"],
+      text: "Share with "
     });
+  });
 };//sharing
