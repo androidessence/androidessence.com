@@ -159,4 +159,93 @@ It's important to consider some pitfalls, too:
 2. As your app scales, or as dependencies change, this approach can have a lot of cascading effects throughout the codebase, that may be tidious to refactor. 
 3. Handling scoping of dependencies is something you will have to manage yourself, in addition to what we've already seen. 
 
+You can see a pull request of this approach [here](https://github.com/AdamMc331/AndroidStudyGuide/pull/25/files). 
+
 Neither of those lists are exhaustive, but they can give you some insight into choosing the right approach for your project. Let's look at two more popular approaches and compare them. 
+
+# Koin
+
+The next approach we'll look at is [Koin](https://insert-koin.io/), a dependency injection framework for Kotlin. 
+
+Conceptually, Koin works very similar to the previous DIY approach. Similar to creating dependency graphs, we'll create something in Koin called a [module](https://doc.insert-koin.io/#/koin-core/modules). Then, everywhere a dependency is used, we can have Koin look it up for us, kind of like how we had to look up dependencies from our base application graph. 
+
+Let's check it out!
+
+## Creating Modules
+
+Let's create modules that match the two graphs from the last example:
+
+```kotlin
+val remoteRepositoryModule = module {
+    // A single creates a singleton to be used by Koin.
+    // To get a new instance each time, use `factory`.
+    single<ArticleRepository> {
+        RetrofitArticleService()
+    }
+}
+
+val viewModelModule = module {
+    viewModel {
+        ArticleListViewModel(repository = get())
+    }
+}
+```
+
+Let's take a look at this line: `ArticleListViewModel(repository = get())`. 
+
+By calling `get()`, this is how we look up dependencies in Koin. This will happen at runtime, and assumes we've defined all of the necessary dependencies in a module. If we don't do this, we will get runtime errors. 
+
+Koin does provide a [checkModules](https://doc.insert-koin.io/#/koin-test/checkmodules_plugin?id=the-junit-checkmodules-test) test method that we can use to validate our modules, though.
+
+## Starting Koin
+
+To have Koin start managing all of our dependencies in order for us to look them up, we can initialize it inside our Application class with all of the modules:
+
+```kotlin
+class StudyGuideApp : Application() {
+    override fun onCreate() {
+        super.onCreate()
+
+        startKoin {
+            androidContext(this@StudyGuideApp)
+            modules(remoteRepositoryModule)
+            modules(viewModelModule)
+        }
+    }
+}
+```
+
+## Looking Up Dependencies
+
+When it comes time to look up dependencies, we can do this a few different ways:
+
+```kotlin
+class ArticleListFragment : Fragment() {
+    // Looks up dependency immediately
+    val articleRepository: ArticleRepository = get()
+
+    // Koin will lazily inject this dependency, when we need it
+    val lazyArticleRepository: ArticleRepository by inject()
+
+    // Using Koin-ViewModel library, we can have it create our ViewModels
+    // and remove all of the factory boilerplate
+    val viewModel: ArticleListViewModel by viewModel()
+}
+```
+
+## Thoughts
+
+You can see a pull request of this approach [here](https://github.com/AdamMc331/AndroidStudyGuide/pull/26/files).
+
+Despite the conceptual similarities, there's some noteworthy differences between Koin and the DIY approach:
+
+1. We're using a third party library, so this means we don't have 100% ownership of the code, and this could have an impact on app size. 
+2. We have less code overall, since Koin is the one that manages the dependencies, we don't need to define all of the graphs and connect them to the places that actually consume dependencies. 
+3. Managing [scoping](https://doc.insert-koin.io/#/koin-core/scopes?id=what-is-a-scope) is supported by the library. 
+4. Dependencies are looked up at runtime, meaning we don't have compile time validation, but we can leverage Koin's test artifact to ship with confidence. 
+
+Let's move on to the last approach. 
+
+# Dagger Hilt
+
+The third and final dependency injection solution we'll discuss is [Hilt](https://developer.android.com/training/dependency-injection/hilt-android).  
