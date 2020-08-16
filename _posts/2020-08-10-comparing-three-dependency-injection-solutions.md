@@ -44,10 +44,119 @@ This is the minimum required work for dependency injection. If your app is doing
 If dependency injection is just that, then why do we have complicated dependency injection libraries for Android? Well, these libraries go on to answer some additional concerns, after we have our base understanding of dependency injection:
 
 1. Who is responsible for creating dependencies? If my ViewModel is created inside a Fragment, should the Fragment be responsible for creating dependencies? This doesn't seem right, because the Fragment is just a view, it should only care about view things. 
-2. If I want to share a dependency across multiple ViewModels or other components, who should be responsible for creating the dependency then? We could put it into the Activity, or the Application class, but for similar reasons, that's not necessarily their responsibility. 
+2. If we want to share a dependency across multiple ViewModels or other components, who should be responsible for creating the dependency then? We could put it into the Activity, or the Application class, but for similar reasons, that's not necessarily their responsibility. 
 3. How do we handle the scope of dependencies? Who is responsible for cleaning up dependencies when they're no longer needed? Who should hang on to dependencies if we want to ensure they outlive our Fragments or Activities? 
 
 As we build larger apps with more screens, more dependencies, and more classes, these questions will become increasingly important. We don't want our Fragment/Activity classes to be bloated with dependency management code. We don't want our Application class storing a reference to shared dependencies. 
 
+# Do It Yourself Approach
 
+For a deep dive into this type of approach, check out [DIY Dependency Injection with Kotlin by Sam Edwards](https://www.youtube.com/watch?v=ucZnYS7LmGU). 
 
+Examining a DIY approach to dependency injection may help explain some of the later approaches, so we'll look at that first. Let's start by creating a dependency graph. A dependency graph is a grouping of related dependencies - and this may contain sub graphs. An example could be:
+
+1. A base dependency graph for the application.
+2. A sub graph that contains all of our repositories. 
+3. A sub graph that contains all of the ViewModel factories. 
+
+## Defining Graphs
+
+We can define each graph as an interface:
+
+```kotlin
+// This graph creates any data repositories for the app. 
+interface RepositoryGraph {
+    fun articleRepository(): ArticleRepository
+}
+
+// This graph creates any ViewModel factories for the app. 
+interface ViewModelFactoryGraph {
+    fun articleListViewModelFactory(): ViewModelProvider.Factory
+}
+
+// This is the base graph, with all of the sub graphs for the application.
+interface AppGraph {
+    val repositoryGraph: RepositoryGraph
+    val viewModelFactoryGraph: ViewModelFactoryGraph
+}
+```
+
+## Implementing Graphs
+
+To implement one of these dependency graphs, we can create a class that builds the dependencies. Try to use a descriptive name! For example, if you're repositories are all talking to a remote service, we could do something like this:
+
+```kotlin
+class RemoteRepositoryGraph : RepositoryGraph {
+    override fun articleRepository(): ArticleRepository {
+        return RetrofitArticleRepository()
+    }
+}
+```
+
+It's okay to have one dependencyGraph depend on another:
+
+```kotlin
+class BaseViewModelFactoryGraph(
+    private val repositoryGraph: RepositoryGraph
+) : ViewModelFactoryGraph {
+    override fun articleListViewModel(): ViewModelProvider.Factory {
+        val repository = repositoryGraph.articleRepository()
+        // Create the ViewModelFactory here
+    }
+}
+```
+
+Last, we can create the base instance:
+
+```kotlin
+class BaseAppGraph : AppGraph {
+    override val repositoryGraph = RemoteRepositoryGraph()
+
+    override val viewModelFactoryGraph = BaseViewModelFactoryGraph(repositoryGraph)
+}
+```
+
+## Exposing Dependency Graphs
+
+To expose the graph throughout the application, we can do so inside our Application class:
+
+```kotlin
+class StudyGuideApp : Application() {
+    val dependencyGraph: AppGraph = BaseAppGraph()
+}
+```
+
+This means we can trim down the code inside our Fragment that was creating the ViewModel:
+
+```kotlin
+class ArticleListFragment : Fragment() {
+    private fun createViewModel() {
+        val viewModelFactory = (requireContext().applicationContext as StudyGuideApp)
+            .dependencyGraph
+            .viewModelFactoryGraph
+            .articleListViewModelFactory()
+
+        val viewModelProvider = ViewModelProviders(this, viewModelFactory)
+        viewModel = viewModelProvider.get(ArticleListViewModel::class.java)
+    }
+}
+```
+
+What's really great about the code above is that our Fragment class no longer has any knowledge of how to create dependencies. It is only responsible for requesting what it needs. We can do that by getting a reference to the application, and pulling the dependency from the graph, and that's it. Any logic around what that dependency really is, how it's created, etc, is managed elsewhere. 
+
+## Pros And Cons
+
+There are some benefits to a DIY approach:
+
+1. All of the dependency management code is managed by us. There's no black box like when you rely on a third party library.
+2. Our app size may be smaller, because we didn't have to import any new dependencies. 
+3. We have actual references to dependencies, so we can leverage the IDE to command/control click into dependencies and see how they're actually created.
+4. This can help with onboarding people who may not be familiar with a specific library. 
+
+It's important to consider some pitfalls, too:
+
+1. This approach is very verbose. It's a lot of additional code just to maintain your graphs, and to reference dependencies from them. 
+2. As your app scales, or as dependencies change, this approach can have a lot of cascading effects throughout the codebase, that may be tidious to refactor. 
+3. Handling scoping of dependencies is something you will have to manage yourself, in addition to what we've already seen. 
+
+Neither of those lists are exhaustive, but they can give you some insight into choosing the right approach for your project. Let's look at two more popular approaches and compare them. 
