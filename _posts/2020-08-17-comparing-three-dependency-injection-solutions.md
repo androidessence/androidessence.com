@@ -2,7 +2,7 @@
 layout: post
 author: adam
 title: Comparing Three Dependency Injection Solutions
-modified: 2020-08-10
+modified: 2020-08-17
 published: true
 tags: [dependency injection]
 categories: [android]
