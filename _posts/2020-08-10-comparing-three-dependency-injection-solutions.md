@@ -169,7 +169,11 @@ The next approach we'll look at is [Koin](https://insert-koin.io/), a dependency
 
 Conceptually, Koin works very similar to the previous DIY approach. Similar to creating dependency graphs, we'll create something in Koin called a [module](https://doc.insert-koin.io/#/koin-core/modules). Then, everywhere a dependency is used, we can have Koin look it up for us, kind of like how we had to look up dependencies from our base application graph. 
 
-Let's check it out!
+## How It Works
+
+Before we look at code, let's discuss conceptually how Koin works. We write the code to tell Koin how to create any dependencies used inside our application. Then, whenever we need these dependencies, Koin will look them up at runtime. As we'll see below, this means that whenever we need a dependency, we can just call `get()` and Koin will do the rest.
+
+This is similar to the last example, where we just got an instance of our application and requested the dependency. With Koin, it's even simpler, as we don't need to create that reference to the application class.
 
 ## Creating Modules
 
@@ -244,8 +248,86 @@ Despite the conceptual similarities, there's some noteworthy differences between
 3. Managing [scoping](https://doc.insert-koin.io/#/koin-core/scopes?id=what-is-a-scope) is supported by the library. 
 4. Dependencies are looked up at runtime, meaning we don't have compile time validation, but we can leverage Koin's test artifact to ship with confidence. 
 
-Let's move on to the last approach. 
-
 # Dagger Hilt
 
-The third and final dependency injection solution we'll discuss is [Hilt](https://developer.android.com/training/dependency-injection/hilt-android).  
+The third and final dependency injection solution we'll discuss is [Hilt](https://developer.android.com/training/dependency-injection/hilt-android). Hilt is a tool built on top of [Dagger](https://dagger.dev/) to improve dependency injection on Android. It is also Google's recommended solution for dependency injection. 
+
+## How It Works
+
+At a high level, Hilt takes a different approach to dependency management than Koin. While Koin looks up dependencies at runtime, Hilt uses annotation processing to validate all of our dependency management at compile time. 
+
+## Creating Modules
+
+A common theme across all approaches is the idea that we take related dependencies and group them. Hilt is no exception. Let's look at a Hilt module, and then we'll talk about each piece:
+
+```kotlin
+@Module
+@InstallIn(ActivityRetainedComponent::class)
+abstract class RemoteRepositoryModule {
+
+    @Binds
+    abstract fun bindArticleRepository(
+        androidEssenceArticleService: AndroidEssenceArticleService
+    ): ArticleRepository
+}
+```
+
+1. A Hilt [module](https://developer.android.com/training/dependency-injection/hilt-android#hilt-modules) tells Hilt how to create instances of certain dependencies. 
+2. Here, we use the [Binds](https://developer.android.com/training/dependency-injection/hilt-android#inject-interfaces) annotation which tells Hilt that whenever we need the `ArticleRepository` interface, we should supply the `AndroidEssenceArticleService` implementation. 
+3. We annotate the module with @InstallIn so that Hilt knows which [components](https://developer.android.com/training/dependency-injection/hilt-android#generated-components) will be using this module. Here, our dependencies are supplied to a ViewModel, which is why we use `ActivityRetainedComponent`. 
+
+NOTE: Not demonstrated here is the [provides](https://developer.android.com/training/dependency-injection/hilt-android#inject-provides) annotation which is used if you're creating an instance of something from a third party, like a Retrofit API. You can see an example of that [here](https://github.com/AdamMc331/AndroidStudyGuide/blob/development/app/src/main/java/com/adammcneilly/androidstudyguide/di/RetrofitModule.kt).  
+
+## Consuming Dependencies
+
+Once you've created a module and Hilt knows how to create dependencies, there's two ways we can consume them. 
+
+First, we can have them injected into the constructor of another class, by annotating the constructor with `@Inject`:
+
+```kotlin
+class ArticleListDataManager @Inject constructor(
+    private val articleRepository: ArticleRepository
+) {
+```
+
+Or we can have it injected into the field of a class, as long as that class is marked with `@AndroidEntryPoint` annotation:
+
+```kotlin
+@AndroidEntryPoint
+class ArticleListFragment : Fragment() {
+
+    @Inject
+    lateinit var articleRepository: ArticleRepository
+}
+```
+
+## Jetpack Integrations
+
+Similar to Koin, Hilt also has a [ViewModel extension](https://developer.android.com/training/dependency-injection/hilt-jetpack#viewmodels) which allows us to inject components straight into ViewModels:
+
+```kotlin
+class ArticleListViewModel @ViewModelInject constructor(
+    private val articleRepository: ArticleRepository
+) : ViewModel() {
+```
+
+Then we can skip all of the ViewModelProvider.Factory boilerplate in our Fragment:
+
+```kotlin
+@AndroidEntryPoint
+class ArticleListFragment : Fragment() {
+
+    private val viewModel: ArticleListViewModel by viewModels()
+}
+```
+
+## Thoughts
+
+You can find the pull request example for Hilt [here](https://github.com/AdamMc331/AndroidStudyGuide/pull/27/files). I also recommend this [YouTube playlist](https://www.youtube.com/watch?v=zTpM2olXCok&list=PLgCYzUzKIBE_MUlyvbCiOWsfq0nFgGXQ9) from Mitch Tabian to learn more.  
+
+Some takeaways from looking at Hilt:
+
+1. We have compile time validation of our dependencies, so we know early if something isn't right.
+2. There's a lot of annotations, which can be confusing. The annotation processing can also have impacts on build time as it scales up. 
+3. Scoping is also handled [by Hilt](https://developer.android.com/training/dependency-injection/hilt-android#component-scopes).
+4. We have a little more code involved than Koin, but still less than the DIY approach. As our dependencies change, the number of places that our code must change is limited as well, which is different from the DIY approach. 
