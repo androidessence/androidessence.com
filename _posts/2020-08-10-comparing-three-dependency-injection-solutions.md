@@ -331,3 +331,11 @@ Some takeaways from looking at Hilt:
 2. There's a lot of annotations, which can be confusing. The annotation processing can also have impacts on build time as it scales up. 
 3. Scoping is also handled [by Hilt](https://developer.android.com/training/dependency-injection/hilt-android#component-scopes).
 4. We have a little more code involved than Koin, but still less than the DIY approach. As our dependencies change, the number of places that our code must change is limited as well, which is different from the DIY approach. 
+
+# Recap
+
+While none of these sections were a true deep dive into any of the dependency injection frameworks, this should provide a quick introduction into what each one looks like, and serve as a quick side-by-side glance at the different approaches. 
+
+If none of these approaches stand out to you, there's even more you can explore - like [Kodein](https://github.com/Kodein-Framework/Kodein-DI) or [Toothpick](https://github.com/stephanenicolas/toothpick). 
+
+Like any other technology, which one is best for your project depends on a number of factors. Is your company strongly against third party libraries? You can roll your own approach. Are you looking for a DI framework that has a quick learning curve and setup? Koin is great for that. Would you prefer a more type safe approach that comes with compile time validation? Hilt is the one for you. 
