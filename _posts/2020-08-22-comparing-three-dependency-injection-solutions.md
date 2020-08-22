@@ -83,7 +83,7 @@ interface AppGraph {
 
 ## Implementing Graphs
 
-To implement one of these dependency graphs, we can create a class that builds the dependencies. Try to use a descriptive name! For example, if you're repositories are all talking to a remote service, we could do something like this:
+To implement one of these dependency graphs, we can create a class that builds the dependencies. Try to use a descriptive name! For example, if your repositories are all talking to a remote service, we could do something like this:
 
 ```kotlin
 class RemoteRepositoryGraph : RepositoryGraph {
@@ -93,7 +93,7 @@ class RemoteRepositoryGraph : RepositoryGraph {
 }
 ```
 
-It's okay to have one dependencyGraph depend on another:
+It's okay to have one dependency graph depend on another:
 
 ```kotlin
 class BaseViewModelFactoryGraph(
@@ -156,7 +156,7 @@ There are some benefits to a DIY approach:
 It's important to consider some pitfalls, too:
 
 1. This approach is very verbose. It's a lot of additional code just to maintain your graphs, and to reference dependencies from them. 
-2. As your app scales, or as dependencies change, this approach can have a lot of cascading effects throughout the codebase, that may be tidious to refactor. 
+2. As your app scales, or as dependencies change, this approach can have a lot of cascading effects throughout the codebase, that may be tedious to refactor. 
 3. Handling scoping of dependencies is something you will have to manage yourself, in addition to what we've already seen. 
 
 You can see a pull request of this approach [here](https://github.com/AdamMc331/AndroidStudyGuide/pull/25/files). 
