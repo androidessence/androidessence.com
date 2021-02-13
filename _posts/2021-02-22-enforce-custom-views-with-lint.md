@@ -156,6 +156,7 @@ class UnusedStudyGuideViewDetector : LayoutDetector() {
         )
     }
 }
+```
 
 Next, we can update `getApplicableElements` to only consider the keys of this map:
 
@@ -191,4 +192,4 @@ Now, the next time we implement a new custom view, all we need to do is add a ne
 
 Lint is a very powerful tool to help ensure code quality and consistency throughout an application. There's helpful APIs to allow developers to write their own custom checks, to ensure our own consistency is enforced when necessary.
 
-If you'd like to see this lint check in action, you can find it in the `lint-checks` module of this [sample application](https://github.com/AdamMc331/AndroidStudyGuide). 
+If you'd like to see this lint check in action, you can find it in the `lint-checks` module of this [sample application](https://github.com/AdamMc331/AndroidStudyGuide/blob/development/lint-checks/src/main/java/com/adammcneilly/studyguide/lint/UnusedStudyGuideViewDetector.kt). 
