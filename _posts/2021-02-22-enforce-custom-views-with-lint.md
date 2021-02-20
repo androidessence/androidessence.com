@@ -32,7 +32,7 @@ Let's get started.
 
 # Implementing The Detector
 
-Keeping in mind that we want this lint check to be scalable, no matter how many views we have, we should ensure that our detector isn't tightly coupled to one specific view. Let's call it a `UnusedStudyGuideViewDetector`:
+Keeping in mind that we want this lint check to be scalable, no matter how many views we have, we should ensure that our detector isn't tightly coupled to one specific view. Let's call it an `UnusedStudyGuideViewDetector`:
 
 ```kotlin
 class UnusedStudyGuideViewDetector : LayoutDetector() {
@@ -44,7 +44,7 @@ A `LayoutDetector` is a custom type of `ResourceXmlDetector` that ensures this l
 
 # Defining The Issue
 
-With our `Detector`, we also need to define `Issue`, which represents the potential bug that lint is looking for. This is where we define severity, priority, and a description:
+With our `Detector`, we also need to define an `Issue`, which represents the potential bug that lint is looking for. This is where we define severity, priority, and a description:
 
 ```kotlin
 @JvmStatic
