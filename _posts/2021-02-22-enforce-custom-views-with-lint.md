@@ -14,7 +14,7 @@ This solution brings a new problem for our codebase - how do we enforce that oth
 
 <!--more-->
 
-## Disclaimer
+## Lint Resources
 
 The focus of this blog post is about a lint check to enforce custom views. We won't talk about the setup of writing a custom lint check, and each individual method in a ton of detail. If you've never written a custom lint check, please check out the following resources which were immensely helpful in making this post a reality. 
 
