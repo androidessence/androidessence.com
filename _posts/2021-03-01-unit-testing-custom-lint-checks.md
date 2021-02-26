@@ -168,3 +168,112 @@ android:layout_height="wrap_content"
         .expectClean()
 }
 ```
+
+# Exploring LintTestResult
+
+Now that we have a formula for creating a lint test, let's highlight some of the helpful methods for validation inside `LintTestResult`. We've already seen `expectClean()`, which is useful for verifying that there are no lint errors. What do we do if we are testing code with violations, though?
+
+## Validating Warning Counts
+
+A quick, high level way to validate a lint result is to check the number of warnings. While it's not as thorough as checking that a specific warning was emitted, knowing that the count emitted was the count expected can provide confidence.
+
+Every lint warning has a `Severity` associated with it. Most common are `Severity.WARNING` and `Severity.ERROR`, but we also have `INFORMATIONAL` and `IGNORE`. 
+
+For warnings and errors, we have utility methods already:
+
+```kotlin
+lint()
+    // ...
+    .run()
+    .expectWarningCount(0)
+    .expectErrorCount(1)
+```
+
+If you want to check other `Severity` levels, you can pass them into the `expectCount` method:
+
+```kotlin
+lint()
+    // ...
+    .run()
+    .expectCount(
+        5,
+        Severity.INFORMATIONAL
+    )
+```
+
+## Validating Lint Output
+
+If you're aware of the actual text that you expect to be output from a lint test, you can do a match against a string:
+
+```kotlin
+lint()
+    // ...
+    .run()
+    .expect(
+        """
+res/layout/layout.xml:2: Error: This view must be replaced by a custom Study Guide implementation. [UnusedStudyGuideView]
+<com.google.android.material.bottomnavigation.BottomNavigationView xmlns:android="http://schemas.android.com/apk/res/android"
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1 errors, 0 warnings
+    """
+    )
+```
+
+If you want to get really fancy with this approach, there is a `.expectMatches()` method that allows you to pass in some RegEx, but I am not skilled enough to write about that one. 
+
+Even more robust, the lint-tests artifacts provides a `TestResultChecker` interface that you can implement yourself, and use that to valid your lint outputs, if you need special validations on the output.
+
+## Validating Fixes
+
+In addition to verifying that your lint check outputs correctly, you may want to verify that any quick fixes you provide work as well. There are two quick approaches to validating that.
+
+First, we can validate the diff result of a lint fix using the `.expectFixDiffs()` method:
+
+```kotlin
+lint()
+    // ...
+    .run()
+    .expectFixDiffs(
+        """
+Fix for res/layout/layout.xml line 2: Replace with com.adammcneilly.androidstudyguide.ui.StudyGuideBottomNavigationView:
+@@ -2 +2
+- <com.google.android.material.bottomnavigation.BottomNavigationView xmlns:android="http://schemas.android.com/apk/res/android"
++ <com.adammcneilly.androidstudyguide.ui.StudyGuideBottomNavigationView xmlns:android="http://schemas.android.com/apk/res/android"
+        """.trimIndent()
+    )
+```
+
+Another approach is to supply a `TestFile` with what you expect your code to look like after a fix:
+
+```kotlin
+val initialFile = xml(
+    "res/layout/layout.xml",
+    """
+<com.google.android.material.bottomnavigation.BottomNavigationView xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+/>
+"""
+)
+
+val fixedFile = xml(
+    "res/layout/layout.xml", 
+    """
+<com.adammcneilly.androidstudyguide.ui.StudyGuideBottomNavigationView xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+/>
+"""
+)
+
+lint()
+    .files(initialFile)
+    .run()
+    // If you only have one quick fix, we can pass null. Otherwise, pass the name
+    // of this fix you want to validate. 
+    .checkFix(fix = null, after = fixedFile)
+```
+
+# Recap
+
+There's even more we can do with the lint-tests dependency, but this should be more than enough to get started. We looked at how to formulate a custom lint test, and the different types of validations we can run against those checks. This should be a great foundation to determine which validations are best for your application. If you'd like to see more sample unit tests, you can find them in [this sample project](https://github.com/AdamMc331/AndroidStudyGuide/blob/development/lint-checks/src/test/java/com/adammcneilly/studyguide/lint/UnusedStudyGuideViewDetectorTest.kt). 
