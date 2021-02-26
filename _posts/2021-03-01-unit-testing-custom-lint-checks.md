@@ -36,7 +36,7 @@ dependencies {
 
 When writing a test for our lint check, we want the test class to extend `LintDetectorTest`. This class provides some utilities for validating a `Detector` - which we wrote in the previous post. 
 
-`LintDetectorTest` is an abstract class that requires us to define the `Detector` that we're testing, and which `Issue`s that are under test as well.
+`LintDetectorTest` is an abstract class that requires us to define the `Detector` that we're testing, and which `Issues` that are under test as well.
 
 ```kotlin
 @RunWith(JUnit4::class)
@@ -58,14 +58,14 @@ class UnusedStudyGuideViewDetectorTest : LintDetectorTest() {
 Before looking at code, let's review all steps that are required to writing a lint test. In our project, each one is going to follow the same flow:
 
 1. Create a `TestLintTask`.
-2. Provide all of the `TestFile`s that we want to test. This is where we mock up the XML, or potentially Java/Kotlin files that we want to test.
+2. Provide all of the `TestFiles` that we want to test. This is where we mock up the XML, or potentially Java/Kotlin files that we want to test.
 3. Provide any additional configuration of the task, if necessary. 
 4. Run the task.
 5. Perform any assertions on the `TestLintResult`.
 
 # Success Test
 
-Let's write a test that we expect to pass. To do this, we'll provide some mock XML that uses the `StudyGuideBottomNavigationView`. We'll run lint, and ensure there were no errors. To do this, we'll look at each step individually.
+Let's write a test that we expect to pass. To do this, we'll provide some mock XML that uses the `StudyGuideBottomNavigationView`. We'll run lint, and ensure there were no errors. Let's break down each step. 
 
 ## Start TestLintTask
 
@@ -94,10 +94,10 @@ fun passesWithStudyGuideBottomNavigationView() {
     val layoutFile = xml(
         "res/layout/layout.xml",
         """
-<com.adammcneilly.androidstudyguide.ui.StudyGuideBottomNavigationView xmlns:android="http://schemas.android.com/apk/res/android"
-android:layout_width="wrap_content"
-android:layout_height="wrap_content"
-/>
+<com.adammcneilly.androidstudyguide.ui.StudyGuideBottomNavigationView 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" />
 """
     )
 
@@ -156,10 +156,10 @@ fun passesWithStudyGuideBottomNavigationView() {
         .files(
             xml(
                 "res/layout/layout.xml", """
-<com.adammcneilly.androidstudyguide.ui.StudyGuideBottomNavigationView xmlns:android="http://schemas.android.com/apk/res/android"
-android:layout_width="wrap_content"
-android:layout_height="wrap_content"
-/>
+<com.adammcneilly.androidstudyguide.ui.StudyGuideBottomNavigationView 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" />
 """
             )
         )
@@ -212,7 +212,7 @@ lint()
     .expect(
         """
 res/layout/layout.xml:2: Error: This view must be replaced by a custom Study Guide implementation. [UnusedStudyGuideView]
-<com.google.android.material.bottomnavigation.BottomNavigationView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.bottomnavigation.BottomNavigationView 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 1 errors, 0 warnings
     """
@@ -237,8 +237,8 @@ lint()
         """
 Fix for res/layout/layout.xml line 2: Replace with com.adammcneilly.androidstudyguide.ui.StudyGuideBottomNavigationView:
 @@ -2 +2
-- <com.google.android.material.bottomnavigation.BottomNavigationView xmlns:android="http://schemas.android.com/apk/res/android"
-+ <com.adammcneilly.androidstudyguide.ui.StudyGuideBottomNavigationView xmlns:android="http://schemas.android.com/apk/res/android"
+- <com.google.android.material.bottomnavigation.BottomNavigationView
++ <com.adammcneilly.androidstudyguide.ui.StudyGuideBottomNavigationView
         """.trimIndent()
     )
 ```
@@ -249,20 +249,20 @@ Another approach is to supply a `TestFile` with what you expect your code to loo
 val initialFile = xml(
     "res/layout/layout.xml",
     """
-<com.google.android.material.bottomnavigation.BottomNavigationView xmlns:android="http://schemas.android.com/apk/res/android"
-android:layout_width="wrap_content"
-android:layout_height="wrap_content"
-/>
+<com.google.android.material.bottomnavigation.BottomNavigationView 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" />
 """
 )
 
 val fixedFile = xml(
     "res/layout/layout.xml", 
     """
-<com.adammcneilly.androidstudyguide.ui.StudyGuideBottomNavigationView xmlns:android="http://schemas.android.com/apk/res/android"
-android:layout_width="wrap_content"
-android:layout_height="wrap_content"
-/>
+<com.adammcneilly.androidstudyguide.ui.StudyGuideBottomNavigationView 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" />
 """
 )
 
