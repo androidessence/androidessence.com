@@ -14,7 +14,7 @@ This solution brings a new problem for our codebase - how do we enforce that oth
 
 <!--more-->
 
-## Disclaimer
+## Lint Resources
 
 The focus of this blog post is about a lint check to enforce custom views. We won't talk about the setup of writing a custom lint check, and each individual method in a ton of detail. If you've never written a custom lint check, please check out the following resources which were immensely helpful in making this post a reality. 
 
@@ -192,4 +192,8 @@ Now, the next time we implement a new custom view, all we need to do is add a ne
 
 Lint is a very powerful tool to help ensure code quality and consistency throughout an application. There's helpful APIs to allow developers to write their own custom checks, to ensure our own consistency is enforced when necessary.
 
+<<<<<<< HEAD
 If you'd like to see this lint check in action, you can find it in the `lint-checks` module of this [sample application](https://github.com/AdamMc331/AndroidStudyGuide/blob/development/lint-checks/src/main/java/com/adammcneilly/studyguide/lint/UnusedStudyGuideViewDetector.kt). 
+=======
+If you'd like to see this lint check in action, you can find it in the `lint-checks` module of this [sample application](https://github.com/AdamMc331/AndroidStudyGuide/blob/development/lint-checks/src/main/java/com/adammcneilly/studyguide/lint/UnusedStudyGuideViewDetector.kt). 
+>>>>>>> @{-1}
