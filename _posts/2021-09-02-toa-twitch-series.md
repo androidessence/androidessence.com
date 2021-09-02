@@ -24,7 +24,7 @@ These are just a number of questions I'm hoping we can answer - and if you'd lik
 
 ## The Streams
 
-In building out this application, our streams will have the same purpose and focus they always have - to provide a real time, raw, relatable Android development experience. None of the streams are scripted, and in each stream we will work together to learn how to solve something. We'll come across bugs and other weird behaviors and see how we can diagnose and solve them in real time. It's what makes Twitch one of my favorite mediums to teach from - because it's unfiltereds coding where our mistakes aren't hidden off camera. 
+In building out this application, our streams will have the same purpose and focus they always have - to provide a real time, raw, relatable Android development experience. None of the streams are scripted, and in each stream we will work together to learn how to solve something. We'll come across bugs and other weird behaviors and see how we can diagnose and solve them in real time. It's what makes Twitch one of my favorite mediums to teach from - it's unfiltered coding where our mistakes aren't hidden off camera. 
 
 ## Staying Organized
 
