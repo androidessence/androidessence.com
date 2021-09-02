@@ -10,7 +10,7 @@ categories: [android]
 
 In the late summer of 2018, I began live streaming on [my Twitch channel](https://twitch.com/adammc331). We started off by building an [Android Study Guide](https://github.com/adammc331/AndroidStudyGuide) application. The purpose of the application was to build something people would be interested in using, while also taking the opportunity to build an application out in the open. 
 
-For a number of reasons, discussed in [the latest video](https://www.twitch.tv/videos/1136324285), I've decided to sunset that project and begin a new live stream series: Tasks Of Affirmation. 
+For a number of reasons, discussed in [the latest video](https://www.youtube.com/watch?v=8Umvlpx-Wvg), I've decided to sunset that project and begin a new live stream series: Tasks Of Affirmation. 
 
 <!--more-->
 
