@@ -28,7 +28,7 @@ The live stream link will have video markers to each of these sections, where yo
 
 GitHub Actions is a way to [automate workflows](https://github.com/features/actions) for your GitHub projects. The possibilities are endless - verifying unit tests pass, running lint checks, publishing to the play store, sharing internal builds, generating documentation - any process that you want to automate can be done via GitHub Actions. 
 
-You don't need to use Actions - there are many other CI tools out there such as Bitrise, Circle CI, Jenkins, and many more. We've opted to use GitHub Actions for this project because it is quick and easy to implement straight from GitHub, where this project is hosted anyways. 
+You don't need to use Actions - there are many CI tools out there such as Bitrise, Circle CI, Jenkins, and others. We've opted to use GitHub Actions for this project because it is quick and easy to implement straight from GitHub, where this project is hosted anyways. 
 
 ### Setup
 
@@ -42,7 +42,7 @@ Danger is a tool for automating [common pull request chores](https://danger.syst
 * Does this PR have a description?
 * Did we assign a reviewer?
 * Is it too long? 
-* Did we modifile the CHANGELOG.md file?
+* Did we modify the CHANGELOG.md file?
 
 Any meta information about a git diff or PR that you can think of, can be validated with Danger. 
 
@@ -66,7 +66,7 @@ A similar tool that provides a lot of benefit is [Detekt](https://github.com/det
 
 * Magic numbers
 * Functions that are too long
-* Classic that have too many functions
+* Classes that have too many functions
 * Functions that have too many parameters
 * And more!
 
