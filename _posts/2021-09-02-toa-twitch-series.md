@@ -4,7 +4,7 @@ author: adam
 title: "Tasks Of Affirmation: A New Twitch Live Stream Series"
 modified: 2021-09-02
 published: true
-tags: [twitch]
+tags: [twitch, toa]
 categories: [android]
 ---
 
