@@ -1,7 +1,7 @@
 ---
 layout: post
 author: adam
-title: "Composing With Confidence: Introduction"
+title: "Composing With Confidence: Setup"
 modified: 2022-01-08
 published: true
 tags: [jetpack compose, testing]
