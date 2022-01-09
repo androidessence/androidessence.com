@@ -37,6 +37,8 @@ There are two ways we can create a test rule, which depend on what we want to te
 If we want to create a specific Activity and test the Compose UI code inside of it, we use `createAndroidComposeRule()`. 
 
 ```kotlin
+// app/src/androidTest/java/com/.../MainActivityTest.kt
+
 class MainActivityTest {
     
     @get:Rule
@@ -49,6 +51,8 @@ class MainActivityTest {
 If you don't care about your specific Activity, but just want something to test an individual composable, we can use the short and sweet `createComposeRule()`:
 
 ```kotlin
+// app/src/androidTest/java/com/.../PrimaryButtonTest.kt
+
 class PrimaryButtonTest {
 
     @get:Rule
@@ -59,6 +63,8 @@ class PrimaryButtonTest {
 This is effectively the same as the previous method, but creates an instance of a `ComponentActivity`. An empty Activity that allows us to render Compose code, like this:
 
 ```kotlin
+// app/src/androidTest/java/com/.../PrimaryButtonTest.kt
+
 class PrimaryButtonTest {
 
     @get:Rule
