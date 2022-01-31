@@ -14,6 +14,8 @@ In this post, we'll take incremental steps toward understanding DI, why we need 
 
 <!--more-->
 
+---
+
 If interested, you can find this content in video form on YouTube:
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/Nr_njiLsjcM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -77,7 +79,7 @@ class ProfileViewModel(
 
 This approach is often referred to as "Constructor Injection", where dependencies are supplied via the constructor of a class. This is the core concept of dependency injection. Kelly Shuster summed it up well in her Tweet:
 
-{% twitter 1020363593060093952 %}
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Ok internet I&#39;ve got a question for you: why is it called Dependency Injection and not just passing stuff in? 🤔 <a href="https://twitter.com/hashtag/AndroidDev?src=hash&amp;ref_src=twsrc%5Etfw">#AndroidDev</a></p>&mdash; Kelly Shuster 🇺🇲 💙 (@KellyShuster) <a href="https://twitter.com/KellyShuster/status/1020363593060093952?ref_src=twsrc%5Etfw">July 20, 2018</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 DI has a complicated name for a concept that can be reduced down to "passing stuff in." 
 
