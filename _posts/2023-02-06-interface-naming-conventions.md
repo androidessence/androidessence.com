@@ -46,7 +46,7 @@ class BookRepositoryImpl {
 
 ## Problems
 
-This approach, while it does clearly separate the convention between an interface and its implementation, has a couple inherent problems in my opinion. 
+This approach, while it does clearly separate the convention between an interface and its implementation, has a couple inherent problems.
 
 1. It assumes one implementation per interface. If we write a `BookRepository` and `BookRepositoryImpl`, but need to add a second, different `BookRepository` what do we call it? `BookRepositoryImpl2`? 
 2. Similarly, the `Impl` suffix doesn't provide any information about how the implementation operates. Is it pulling local data? Remote data? What is the data source used by `BookRepositoryImpl`? All of these questions require active investigation and diving into the code to understand and come back with a confident answer. 
@@ -71,7 +71,7 @@ class NewYorkTimesBookRepository : BookRepository
 
 ### Naming With Situation
 
-Sometimes, our implementation might always be specific to the same data source/dependency. We still may want to leverage interfaces because it helps with testing, or some other situation. In these moments, we can consider naming our interface based on the situation it is being used. For example, consider we include some interface for Crashlytics initialization. In our production app, we can name it accordingly.
+Sometimes, our implementation might always be specific to the same data source/dependency. We still may want to leverage interfaces because it helps with testing, or some other situation. In these moments, we can consider naming our interface based on the situation it is being used in. For example, consider we include some interface for Crashlytics initialization. In our production app, we can name it accordingly.
 
 ```kotlin
 interface CrashlyticsInitializer
@@ -97,4 +97,4 @@ class BookRepositoryNewYorkTimesImpl : BookRepository
 
 ## Recap
 
-At the end of the day, the naming convention you and your team use is a personal choice. By using interfaces, we're making a good choice toward scalable applications. The naming convention is mostly cosmetic, but I hope you've seen that it can serve a purpose for discoverability and quickly understanding the codebase by reading class names. What I believe matters most is that you take the time to think about it. Your conversation may ultimately end with "well, there's no dependency or situation specific usage here, so we just want to fall back on the `Impl` suffix. That's okay! Not all suggestions apply to all situations, but perhaps these ideas produce just a few less `InterfaceImpl` conventions out there.
+At the end of the day, the naming convention you and your team use is a personal choice. By using interfaces, we're making a good choice toward scalable applications. The naming convention is mostly cosmetic, but I hope you've seen that it can serve a purpose for discoverability and quickly understanding the codebase by reading class names. What I believe matters most is that you take the time to think about it. Your conversation may ultimately end with "well, there's no dependency or situation specific usage here, so we just want to fall back on the `Impl` suffix. That's okay! Not all suggestions apply to all situations, but hopefully this post helps you find ways to provide more clarity in class names.
