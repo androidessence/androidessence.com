@@ -81,6 +81,23 @@ class ProdCrashlyticsInitializer : CrashlyticsInitializer
 
 Why is this better than `CrashlyticsInitializerImpl`? I believe this is better because it begins to set a precedent for other situations we might use a `CrashlyticsInitializer`. Situations like our device tests, where we can have a `TestCrashlyticsInitializer` or a special debug flavor that includes a `DebugCrashlyticsInitializer`. 
 
+### Naming With Responsibility
+
+Another way to look at this is to think of the reponsibility of a class. Perhaps your repository combines other data sources, with an offline first preference. You may consider something like this:
+
+```kotlin
+interface BookRepository {
+    // ...
+}
+
+class OfflineFirstBookRepository(
+    private val localRepository: BookRepository,
+    private val remoteRepository: BookRepository,
+) : BookRepository { 
+    // ...
+}
+```
+
 ### Other Considerations
 
 The above suggestions are my personal preference, but there are other situations you may want to consider. By prefixing the implementations, searching for them in the IDE becomes slightly less straight forward. When searching in Android Studio, for example, if we start typing `BookRepository`, any files that are named `BookRepositoryImpl` get included in the same search. For that reason, you may consider taking the above suggestions, and combining them with the traditional suffix, like this:
