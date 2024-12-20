@@ -1,7 +1,7 @@
 ---
 layout: post
 author: adam
-title: "Implementing Android XR With Kotlin Multiplatform"
+title: "Wrapping Android XR For KMP"
 modified: 2024-12-19
 published: true
 tags: [xr, kmp]
